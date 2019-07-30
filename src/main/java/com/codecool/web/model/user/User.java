@@ -5,9 +5,13 @@ public class User {
     private String name;
     private String email;
     private String password;
-    private boolean role;
+    private Role role;
     
-    public User(String userId, String name, String email, String password, boolean role) {
+    public enum Role {
+        MENTOR, STUDENT
+    }
+    
+    public User(String userId, String name, String email, String password, Role role) {
         this.userId = userId;
         this.name = name;
         this.email = email;
@@ -31,14 +35,6 @@ public class User {
         return password;
     }
     
-    public boolean isRole() {
-        return role;
-    }
-    
-    public void setName(String name) {
-        this.name = name;
-    }
-    
     public void setEmail(String email) {
         this.email = email;
     }
@@ -47,7 +43,11 @@ public class User {
         this.password = password;
     }
     
-    public void setRole(boolean role) {
+    public Role getRole() {
+        return role;
+    }
+    
+    public void setRole(Role role) {
         this.role = role;
     }
 }
