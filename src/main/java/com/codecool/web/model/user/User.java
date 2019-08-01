@@ -1,23 +1,27 @@
 package com.codecool.web.model.user;
 
 public class User {
-    private String userId;
+    //private String userId;
     private String name;
     private String email;
+    private String role;
     private String password;
-    private boolean role;
-    
-    public User(String userId, String name, String email, String password, boolean role) {
-        this.userId = userId;
+
+    public User(String name, String email, String role, String password) {
+       // this.userId = userId;
         this.name = name;
         this.email = email;
-        this.password = password;
         this.role = role;
+        this.password = password;
     }
-    
-    public String getUserId() {
+
+    public User() {
+
+    }
+
+    /*public String getUserId() {
         return userId;
-    }
+    }*/
     
     public String getName() {
         return name;
@@ -30,10 +34,7 @@ public class User {
     public String getPassword() {
         return password;
     }
-    
-    public boolean isRole() {
-        return role;
-    }
+
     
     public void setName(String name) {
         this.name = name;
@@ -46,8 +47,9 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
-    
-    public void setRole(boolean role) {
+
+    public void setRole(String role){
         this.role = role;
     }
+    
 }
