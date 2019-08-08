@@ -8,10 +8,18 @@
 </head>
 <style>
     div.ex {
-        text-align: right; width:300px;
+        text-align: right; width:auto;
         padding: 10px;
         border: 5px solid grey;
         margin: 0px
+    }
+    select.button {
+        position: absolute;
+        left: 30em;
+    }
+    input.button {
+        position: absolute;
+        left: 30em;
     }
 </style>
 <body>
@@ -31,13 +39,13 @@
                 <td>Password</td>
                 <td><input type="password" name="password"></td>
             </tr>
-            <select name = "role">
+            <select class="button" name = "role">
                 <option>Mentor</option>
                 <option>Student</option>
             </select>
 
         </table>
-        <input type="submit" value="register" />
+        <input class="button" type="submit" value="register" />
     </form>
 </div>
 <li><a href="login.jsp">LOGIN</a> </li>

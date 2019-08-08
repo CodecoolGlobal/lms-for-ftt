@@ -19,7 +19,7 @@ public final class TextService {
         ));
     }
     
-    public TextService getMyInstance() {
+    public static TextService getMyInstance() {
         return myInstance;
     }
     

@@ -1,7 +1,7 @@
 package com.codecool.web.model.user;
 
 public class User {
-    //private String userId;
+    private String userId;
     private String name;
     private String email;
     private String role;
@@ -19,9 +19,9 @@ public class User {
 
     }
 
-    /*public String getUserId() {
+    public String getUserId() {
         return userId;
-    }*/
+    }
     
     public String getName() {
         return name;
