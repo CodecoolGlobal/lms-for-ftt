@@ -1,3 +1,6 @@
+--PostgreSQL 9.6
+--'\\' is a delimiter
+
 SET statement_timeout = 0;
 SET lock_timeout = 0;
 SET client_encoding = 'UTF8';
@@ -18,45 +21,45 @@ DROP TABLE IF EXISTS answers CASCADE;
 DROP TABLE IF EXISTS texts CASCADE;
 
 CREATE TABLE users(
-     user_id smallserial,
-     user_name varchar(15) NOT NULL,
-     email varchar(254) UNIQUE NOT NULL,
-     user_role varchar(10) NOT NULL,
-     password varchar(25) NOT NULL ,
-     PRIMARY KEY(user_id)
+                      user_id serial,
+                      user_name varchar(15) NOT NULL,
+                      email varchar(254) UNIQUE NOT NULL,
+                      user_role varchar(10) NOT NULL,
+                      password varchar(25) NOT NULL ,
+                      PRIMARY KEY(user_id)
 );
 
 CREATE TABLE attendance(
-    attendance_id smallserial,
-    user_id smallint REFERENCES users(user_id) ON DELETE CASCADE,
-    date date,
-    PRIMARY KEY(attendance_id, user_id)
+                           attendance_id serial,
+                           user_id smallint REFERENCES users(user_id) ON DELETE CASCADE,
+                           date date,
+                           PRIMARY KEY(attendance_id)
 );
 
 CREATE TABLE assignments(
-    assignment_id smallserial,
-    title varchar(255) NOT NULL ,
-    question text NOT NULL,
-    max_score smallint NOT NULL,
-    is_published boolean,
-    PRIMARY KEY (assignment_id, title)
+                            assignment_id serial,
+                            title varchar(255) NOT NULL ,
+                            question text NOT NULL,
+                            max_score smallint NOT NULL,
+                            is_published boolean,
+                            PRIMARY KEY (assignment_id)
 );
 
 CREATE TABLE answers(
-    assignments_id smallint REFERENCES assignments(assignment_id) ON DELETE CASCADE,
-    user_id smallint REFERENCES users(user_id) ON DELETE CASCADE,
-    answer text,
-    score smallint,
-    submission_date TIMESTAMP WITH TIME ZONE NOT NULL,
-    PRIMARY KEY (assignments_id, user_id)
+                        assignment_id serial REFERENCES assignments(assignment_id) ON DELETE CASCADE,
+                        user_id smallint REFERENCES users(user_id) ON DELETE CASCADE,
+                        answer text,
+                        score smallint,
+                        submission_date TIMESTAMP WITH TIME ZONE NOT NULL,
+                        PRIMARY KEY (assignment_id)
 );
 
 CREATE TABLE texts(
-    text_id smallserial,
-    title varchar(255),
-    text text,
-    is_published boolean,
-    PRIMARY KEY (text_id, title)
+                      text_id serial,
+                      title varchar(255),
+                      text text,
+                      is_published boolean,
+                      PRIMARY KEY (text_id)
 );
 
 INSERT INTO users (user_name, email, user_role, password) VALUES ('Rory', 'rory@gmail.com', 'mentor', 'hicool?1');
@@ -79,12 +82,12 @@ INSERT INTO users (user_name, email, user_role, password) VALUES ('Tamy', 'tamy@
 INSERT INTO users (user_name, email, user_role, password) VALUES ('Andi', 'andi@gmail.com', 'student', 'hicool?18');
 INSERT INTO users (user_name, email, user_role, password) VALUES ('Berta', 'berta@gmail.com', 'mentor', 'hicool?19');
 
-INSERT INTO attendance (user_id, date) VALUES (0, '2019-06-12');
+INSERT INTO attendance (user_id, date) VALUES (1, '2019-06-12');
 INSERT INTO attendance (user_id, date) VALUES (2, '2019-06-12');
 INSERT INTO attendance (user_id, date) VALUES (5, '2019-06-12');
 INSERT INTO attendance (user_id, date) VALUES (3, '2019-06-12');
 INSERT INTO attendance (user_id, date) VALUES (2, '2019-06-13');
-INSERT INTO attendance (user_id, date) VALUES (0, '2019-06-13');
+INSERT INTO attendance (user_id, date) VALUES (1, '2019-06-13');
 INSERT INTO attendance (user_id, date) VALUES (2, '2019-06-17');
 INSERT INTO attendance (user_id, date) VALUES (1, '2019-06-17');
 INSERT INTO attendance (user_id, date) VALUES (10, '2019-06-17');
@@ -104,9 +107,9 @@ INSERT INTO texts (title, text, is_published) VALUES ('Sessions','Session is a g
 INSERT INTO texts(title, text, is_published) VALUES ('Filters','Filters allow to pass or block a requests based on some criteria. They decide which request to block by inspecting the "request" object. Requests containing a JSESSIONID which has an associated attribute, flag, object, etc. which signifies that the user (which to the JSESSIONID belongs to) has already logged in are allowed to pass, other requests are blocked (e.g. redirected to the login page).',true);
 INSERT INTO texts(title, text, is_published) VALUES ('Handling XML with Java?','When you were dealing with CSV you had to write custom code to read and write CSV files. This is what we call serialization (writing objects to a file in a certain format) and deserialization (reading a file in a certain format into objects). You have to do something similar when dealing with XML, but it is a little more complex, and you have to get a grasp of the DOM concept.',false);
 INSERT INTO texts(title, text, is_published) VALUES ('Yet another language to master: Java','Java programming language was originally developed' ||
-                                                        'by Sun Microsystems which was initiated by James Gosling and released in 1995 as core component of Sun Microsystems'' Java platform (Java 1.0 [J2SE]). The latest stable release of the Java Standard Edition is Java SE 9. With the advancement of Java and its widespread popularity, multiple configurations were built to suit various types of platforms. For example: J2EE for Enterprise Applications, J2ME for Mobile Applications. <br> <br>' ||
-                                                        'The new J2 versions were renamed as Java SE, Java EE, and Java ME respectively. Java is guaranteed to be Write Once, Run Anywhere. <br><ul><li>Object Oriented − In Java,' ||
-                                                        'everything is an Object. Java can be easily extended since it is based on the Object model.</li><li>Simple − Java is designed to be easy to learn. If you understand the basic concept of OOP Java, it would be easy to master.</li><li>Secure − With Java''s secure feature it enables to develop virus-free, tamper-free systems. Authentication techniques are based on public-key encryption.</li></ul>',true);
+                                                                                            'by Sun Microsystems which was initiated by James Gosling and released in 1995 as core component of Sun Microsystems'' Java platform (Java 1.0 [J2SE]). The latest stable release of the Java Standard Edition is Java SE 9. With the advancement of Java and its widespread popularity, multiple configurations were built to suit various types of platforms. For example: J2EE for Enterprise Applications, J2ME for Mobile Applications. <br> <br>' ||
+                                                                                            'The new J2 versions were renamed as Java SE, Java EE, and Java ME respectively. Java is guaranteed to be Write Once, Run Anywhere. <br><ul><li>Object Oriented − In Java,' ||
+                                                                                            'everything is an Object. Java can be easily extended since it is based on the Object model.</li><li>Simple − Java is designed to be easy to learn. If you understand the basic concept of OOP Java, it would be easy to master.</li><li>Secure − With Java''s secure feature it enables to develop virus-free, tamper-free systems. Authentication techniques are based on public-key encryption.</li></ul>',true);
 INSERT INTO texts(title, text, is_published) VALUES ('Interpreted vs. compiled','Session is a generic term in the context of computers, programming. Here is a very broad description of it. You have seen and used session during the Green Commitment project. Clients connected the server, sent some information over their socket connection, then terminated the connection. This was basically a session between the client and the server. Right now what we are interested in are HTTP sessions.',true);
 INSERT INTO texts(title, text, is_published) VALUES ('for vs foreach','Session is a generic term in the context of computers, programming. Here is a very broad description of it. You have seen and used session during the Green Commitment project. Clients connected the server, sent some information over their socket connection, then terminated the connection. This was basically a session between the client and the server. Right now what we are interested in are HTTP sessions.',false);
 INSERT INTO texts(title, text, is_published) VALUES ('Method signature','Session is a generic term in the context of computers, programming. Here is a very broad description of it. You have seen and used session during the Green Commitment project. Clients connected the server, sent some information over their socket connection, then terminated the connection. This was basically a session between the client and the server. Right now what we are interested in are HTTP sessions.',true);
