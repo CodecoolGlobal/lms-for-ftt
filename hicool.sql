@@ -21,7 +21,7 @@ DROP TABLE IF EXISTS answers CASCADE;
 DROP TABLE IF EXISTS texts CASCADE;
 
 CREATE TABLE users(
-                      user_id serial,
+                      user_id smallserial,
                       user_name varchar(15) NOT NULL,
                       email varchar(254) UNIQUE NOT NULL,
                       user_role varchar(10) NOT NULL,
@@ -30,14 +30,14 @@ CREATE TABLE users(
 );
 
 CREATE TABLE attendance(
-                           attendance_id serial,
+                           attendance_id smallserial,
                            user_id smallint REFERENCES users(user_id) ON DELETE CASCADE,
                            date date,
                            PRIMARY KEY(attendance_id)
 );
 
 CREATE TABLE assignments(
-                            assignment_id serial,
+                            assignment_id smallserial,
                             title varchar(255) NOT NULL ,
                             question text NOT NULL,
                             max_score smallint NOT NULL,
@@ -46,7 +46,7 @@ CREATE TABLE assignments(
 );
 
 CREATE TABLE answers(
-                        assignment_id serial REFERENCES assignments(assignment_id) ON DELETE CASCADE,
+                        assignment_id smallserial REFERENCES assignments(assignment_id) ON DELETE CASCADE,
                         user_id smallint REFERENCES users(user_id) ON DELETE CASCADE,
                         answer text,
                         score smallint,
@@ -55,7 +55,7 @@ CREATE TABLE answers(
 );
 
 CREATE TABLE texts(
-                      text_id serial,
+                      text_id smallserial,
                       title varchar(255),
                       text text,
                       is_published boolean,
