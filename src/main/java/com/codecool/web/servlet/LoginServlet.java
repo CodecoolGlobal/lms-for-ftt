@@ -2,7 +2,6 @@ package com.codecool.web.servlet;
 
 import com.codecool.web.model.user.User;
 import com.codecool.web.service.LoginService;
-import com.codecool.web.service.UserDaoImpl;
 import com.codecool.web.service.UserService;
 
 import javax.servlet.ServletException;
@@ -14,15 +13,9 @@ import java.io.IOException;
 import java.util.List;
 
 @WebServlet("/login")
-public class LoginServlet extends HttpServlet {
-    UserService userService = new UserService();
+public class LoginServlet extends AbstractServlet {
 
-    @Override
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("login.jsp").forward(request, response);
-    }
-
-    @Override
+    /*@Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
         UserService userService = (UserService) request.getServletContext().getAttribute("userService");
         LoginService loginService = (LoginService) request.getServletContext().getAttribute("loginService");
@@ -40,6 +33,11 @@ public class LoginServlet extends HttpServlet {
             request.setAttribute("error", "Incorrect login");
             request.getRequestDispatcher("login.jsp").forward(request,response);
         }
+    }*/
+    
+    @Override
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.getRequestDispatcher("login.jsp").forward(request, response);
     }
 
 }

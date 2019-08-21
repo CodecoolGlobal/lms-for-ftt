@@ -1,38 +1,31 @@
 package com.codecool.web.service;
 
+import com.codecool.web.DAO.DBTextDao;
 import com.codecool.web.model.curriculum.Text;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public final class TextService {
     
-    private List<Text> textPages;
-    private static TextService myInstance = new TextService();
+    private final DBTextDao textDao;
     
-    private TextService() {
-        textPages = new ArrayList<>(Arrays.asList(
-            new Text("p1", "jazzpage1", "It can be anything.", false),
-            new Text("p2", "jazzpage2", "It can even be nothing.", false),
-            new Text("p3", "jazzpage3", "... or something.", false)
-        ));
+    public TextService(DBTextDao textDao) {
+        this.textDao = textDao;
     }
     
-    public static TextService getMyInstance() {
-        return myInstance;
+    public void addText(Text text) throws SQLException {
+        textDao.addText(text);
     }
     
-    public void addText(Text text) {
-        textPages.add(text);
+    public List<Text> getAllText() throws SQLException{
+        return textDao.loadAllTexts();
     }
     
-    public List<Text> getText() {
-        return textPages;
-    }
-    
-    public void updateText(String title, String text) {
-        for (Text t : getText()) {
+    public void updateText(String title, String text) throws SQLException {
+        for (Text t : getAllText()) {
             if (t.getTitle().equals(title)) {
                 t.setText(text);
             }

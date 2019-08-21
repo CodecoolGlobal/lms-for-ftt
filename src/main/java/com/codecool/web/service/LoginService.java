@@ -2,6 +2,8 @@ package com.codecool.web.service;
 
 import com.codecool.web.model.user.User;
 
+import java.sql.SQLException;
+
 public class LoginService {
 
     private final UserService userService;
@@ -10,7 +12,7 @@ public class LoginService {
         this.userService = userService;
     }
 
-    public boolean login(String email, String password){
+    public boolean login(String email, String password) throws SQLException {
         for(User user : userService.getUsers()){
             if(user.getEmail().equals(email) && user.getPassword().equals(password)){
                 return true;

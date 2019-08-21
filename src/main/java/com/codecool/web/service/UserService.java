@@ -1,33 +1,57 @@
 package com.codecool.web.service;
 
+import com.codecool.web.DAO.DBUserDao;
 import com.codecool.web.model.user.User;
 
+import com.codecool.web.model.enums.Role;
+
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class UserService {
 
-    private final List<User> users;
+    private final DBUserDao userDao;
 
 
-    public UserService(){
-        users = UserDaoImpl.getInstance().getUsers();
-        users.add(new User("user", "user", "Student", "1234"));
-
+    public UserService(DBUserDao userDao){
+        this.userDao = userDao;
 
     }
 
-    public List<User> getUsers() {
-        return users;
+    public List<User> getUsers() throws SQLException {
+        return userDao.findUsers();
     }
 
-    public User getUser(String mail){
-        for(User user : users){
+    public User getUser(String mail) throws SQLException{
+        for(User user : userDao.findUsers()){
             if(user.getEmail().equals(mail)){
                 return user;
             }
         }
         return null;
 
+    }
+    
+    public String notValidated(String name, String email, String role, String passWord) throws SQLException {
+        String validated = "newUser";
+        
+        for (User user : getUsers()) {
+            if ( user.getEmail().equals(email)) {
+                validated = "registered";
+            } else if (name == null || email == null || role == null|| passWord == null ) {
+                validated = "empty";
+            }
+        }
+        return validated;
+    }
+    public void updateUser(User user) {
+        //ellenőrizni van e már regisztált user
+        ;
+        
+    }
+    
+    public void addUser(String name, String email, String role, String passwWord) throws  SQLException {
+        userDao.addUser(name, email, role, passwWord);
     }
 }

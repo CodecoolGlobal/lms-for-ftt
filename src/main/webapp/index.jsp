@@ -11,7 +11,7 @@
         text-align: right; width:auto;
         padding: 10px;
         border: 5px solid grey;
-        margin: 0px
+        margin: 0px;
     }
     select.button {
         position: absolute;
@@ -26,22 +26,22 @@
 <h1>Registration Form</h1>
 <div class="ex">
     <form action="RegistrationServlet" method="post">
-        <table style="with: 50%">
+        <table style="width: 50%">
             <tr>
                 <td>Full Name</td>
-                <td><input type="text" name="fullname" /></td>
+                <td><input type="text" name="user_name" /></td>
             </tr>
             <tr>
                 <td>E-mail</td>
-                <td><input type="text" name="mail" /></td>
+                <td><input type="text" name="email" /></td>
             </tr>
             <tr>
                 <td>Password</td>
                 <td><input type="password" name="password"></td>
             </tr>
             <select class="button" name = "role">
-                <option>Mentor</option>
-                <option>Student</option>
+                <option>MENTOR</option>
+                <option>STUDENT</option>
             </select>
 
         </table>

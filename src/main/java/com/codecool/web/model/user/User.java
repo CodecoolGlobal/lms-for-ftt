@@ -1,25 +1,37 @@
 package com.codecool.web.model.user;
 
+import com.codecool.web.model.enums.Role;
+
+import java.util.Objects;
+
 public class User {
-    private String userId;
+    private int userId;
     private String name;
     private String email;
-    private String role;
+    private Role role;
     private String password;
-
-    public User(String name, String email, String role, String password) {
-       // this.userId = userId;
+    private String roleToString;
+    
+    public User(String name, String email, String roleToString, String password) {
+        this.name = name;
+        this.email = email;
+        this.role = Role.valueOf(roleToString);
+        this.password = password;
+    }
+    
+    public User(int userId, String name, String email, Role role, String password) {
+        this.userId = userId;
         this.name = name;
         this.email = email;
         this.role = role;
         this.password = password;
     }
-
+    
     public User() {
 
     }
-
-    public String getUserId() {
+    
+    public int getUserId() {
         return userId;
     }
     
@@ -34,22 +46,12 @@ public class User {
     public String getPassword() {
         return password;
     }
-
     
-    public void setName(String name) {
-        this.name = name;
+    public Object getRole() {
+        return role;
     }
     
-    public void setEmail(String email) {
-        this.email = email;
+    public String getRoleToString() {
+        return roleToString;
     }
-    
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public void setRole(String role){
-        this.role = role;
-    }
-    
 }

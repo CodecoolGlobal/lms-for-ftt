@@ -13,8 +13,8 @@
     </style>
 </head>
 <body>
-<% String name =  request.getParameter("fullname");
-    String mail = request.getParameter("mail");
+<% String name =  request.getParameter("user_name");
+    String mail = request.getParameter("email");
     String role = request.getParameter("role");
      %>
 <table id ="nat">
@@ -31,6 +31,6 @@
         <td><%= role %></td>
     </tr>
 </table>
-<li><a href="index.jsp">Back to registration page</a></li>
+<li><a href="login.jsp">Back to login page</a></li>
 </body>
 </html>
