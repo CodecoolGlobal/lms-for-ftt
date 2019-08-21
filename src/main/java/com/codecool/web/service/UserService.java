@@ -54,4 +54,13 @@ public class UserService {
     public void addUser(String name, String email, String role, String passwWord) throws  SQLException {
         userDao.addUser(name, email, role, passwWord);
     }
+    
+    public boolean login(String email, String password) throws SQLException {
+        for(User user : getUsers()){
+            if(user.getEmail().equals(email) && user.getPassword().equals(password)){
+                return true;
+            }
+        }
+        return false;
+    }
 }
