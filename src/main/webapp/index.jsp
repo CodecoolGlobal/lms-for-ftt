@@ -5,47 +5,24 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <title>User Data</title>
+    <link rel="stylesheet" type="text/css" href="css/regstyle.css">
 </head>
-<style>
-    div.ex {
-        text-align: right; width:auto;
-        padding: 10px;
-        border: 5px solid grey;
-        margin: 0px;
-    }
-    select.button {
-        position: absolute;
-        left: 30em;
-    }
-    input.button {
-        position: absolute;
-        left: 30em;
-    }
-</style>
+
 <body>
 <h1>Registration Form</h1>
 <div class="ex">
     <form action="RegistrationServlet" method="post">
-        <table style="width: 50%">
-            <tr>
-                <td>Full Name</td>
-                <td><input type="text" name="user_name" /></td>
-            </tr>
-            <tr>
-                <td>E-mail</td>
-                <td><input type="text" name="email" /></td>
-            </tr>
-            <tr>
-                <td>Password</td>
-                <td><input type="password" name="password"></td>
-            </tr>
-            <select class="button" name = "role">
-                <option>MENTOR</option>
-                <option>STUDENT</option>
-            </select>
 
-        </table>
-        <input class="button" type="submit" value="register" />
+        <p>Name: <input class="tab" type="text" name="user_name" ></p>
+        <p>E-mail: <input class="tab" type="text" name="email" ></p>
+        <p>Password: <input class="tab" type="password" name="password" ></p>
+        <select class="button" name = "role">
+            <option>MENTOR</option>
+            <option>STUDENT</option>
+        </select>
+        <input class="lbutton" type="submit" value="register" />
+        <br>
+        <br>
     </form>
 </div>
 <li><a href="login.jsp">LOGIN</a> </li>

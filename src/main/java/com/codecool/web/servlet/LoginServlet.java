@@ -2,18 +2,15 @@ package com.codecool.web.servlet;
 
 import com.codecool.web.DAO.DBUserDao;
 import com.codecool.web.model.user.User;
-import com.codecool.web.service.LoginService;
 import com.codecool.web.service.UserService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.List;
 
 @WebServlet("/login")
 public class LoginServlet extends AbstractServlet {
@@ -23,8 +20,7 @@ public class LoginServlet extends AbstractServlet {
         try (Connection connection = getConnection(request.getServletContext())){
             DBUserDao userDao = new DBUserDao(connection);
             UserService us = new UserService(userDao);
-            //LoginService loginService = (LoginService) request.getServletContext().getAttribute("loginService");
-    
+            
             String email = request.getParameter("email");
             String password = request.getParameter("password");
     
