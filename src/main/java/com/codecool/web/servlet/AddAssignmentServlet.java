@@ -16,14 +16,13 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 
-@WebServlet("/protected/assignment")
-public class AddAssignment extends AbstractServlet {
+@WebServlet("/protected/add-assignment")
+public class AddAssignmentServlet extends AbstractServlet {
     
     public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         PrintWriter out = resp.getWriter();
         resp.setContentType("text/plain");
-    
-    
+        
         try (Connection connection = getConnection(req.getServletContext())){
             DBAssignmentDao assignmentDao = new DBAssignmentDao(connection);
             AssignmentService assignmentService = new AssignmentService(assignmentDao);
@@ -35,10 +34,11 @@ public class AddAssignment extends AbstractServlet {
             if (req.getParameter("question") != null) {
                 String title = req.getParameter("title");
                 String question = req.getParameter("question");
-                int maxScore = Integer.getInteger("max_Score");
+                int maxScore = Integer.parseInt(req.getParameter("max_score"));
                 Boolean isPublished = Boolean.getBoolean(req.getParameter("is_published"));
             
                 Assignment assignment = new Assignment(title, question, isPublished, maxScore);
+                assignmentService.addAssignment(assignment);
             }
         } catch (SQLException e) {
             e.printStackTrace();

@@ -15,12 +15,17 @@ public class DBAssignmentDao extends AbstractDao {
         boolean autoCommit = connection.getAutoCommit();
         connection.setAutoCommit(false);
         
-        String sql = "INSERT INTO assignments (title, question, max_score) VALUES (?, ?, ?)";
+        String title = assignment.getTitle();
+        String question = assignment.getQuestion();
+        int maxScore = assignment.getMaxScore();
+        boolean isPublished = assignment.isPublished();
+        
+        String sql = "INSERT INTO assignments (title, question, max_score, is_published) VALUES (?, ?, ?, ?)";
         try (PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-            statement.setString(1, assignment.getTitle());
-            statement.setString(2, assignment.getQuestion());
-            statement.setInt(3, assignment.getMaxScore());
-            statement.setBoolean(4, assignment.isPublished());
+            statement.setString(1, title);
+            statement.setString(2, question);
+            statement.setInt(3, maxScore);
+            statement.setBoolean(4, isPublished);
             executeInsert(statement);
             int id = fetchGeneratedId(statement);
             return new Assignment(id, assignment.getTitle(), assignment.getQuestion(), assignment.isPublished(), assignment.getMaxScore());
