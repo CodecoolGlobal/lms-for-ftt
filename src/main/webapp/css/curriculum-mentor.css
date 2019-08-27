@@ -58,3 +58,7 @@ tr {
 
 tr:nth-child(even) {background: #FFFFFF}
 tr:nth-child(odd) {background: #BBBBBB}
+
+h2 {
+    text-align: center;
+}

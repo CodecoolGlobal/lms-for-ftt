@@ -41,7 +41,7 @@ public class DBAssignmentDao extends AbstractDao {
             while (resultSet.next()) {
                 Assignment assignment = new Assignment(resultSet.getString("title"),
                 resultSet.getString("question"),
-                resultSet.getBoolean("ispublished"),
+                resultSet.getBoolean("is_published"),
                 resultSet.getInt("max_score"));
                 
                 

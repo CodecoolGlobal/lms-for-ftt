@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page import="java.util.List" %>
 <%@ page import="com.codecool.web.model.curriculum.Text" %>
+<%@ page import="com.codecool.web.model.curriculum.Assignment" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!doctype html>
 <html lang="en">
@@ -37,12 +38,26 @@
                 <td> ${text.getTitle()}</td>
                 <td> ${text.isPublished()}</td>
             </tr>
-
         </c:forEach>
-
-
     </table>
 </form>
+
+<h2>Assignment page list</h2>
+<table>
+    <tr>
+        <th>Title</th>
+        <th>Maximum score</th>
+        <th>Is published</th>
+    </tr>
+
+    <c:forEach var="assignment" items="${assignments}">
+        <tr>
+            <td> ${assignment.getTitle()}</td>
+            <td> ${assignment.getMaxScore()}</td>
+            <td> ${assignment.isPublished()}</td>
+        </tr>
+    </c:forEach>
+</table>
 
 
 </body>
