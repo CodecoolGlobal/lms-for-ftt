@@ -21,7 +21,7 @@
                 <p><textarea rows="20" cols="20" name="question"></textarea></p>
 
                 <p>Possible Max Score: </p>
-                <p><input type="number" min="1" max="10" name="max_score" placeholder=1></p>
+                <p><input type="number" min="1" max="10" name="max_score" placeholder=3></p>
                 <br>
                 <select name="is_published" size="1">
                         <option value="false">unpublished</option>
