@@ -4,8 +4,6 @@ import com.codecool.web.DAO.DBTextDao;
 import com.codecool.web.model.curriculum.Text;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public final class TextService {
@@ -24,11 +22,13 @@ public final class TextService {
         return textDao.loadAllTexts();
     }
     
-    public void updateText(String title, String text) throws SQLException {
+    public Text findTextByTitle(String title) throws SQLException {
+        Text text = null;
         for (Text t : getAllText()) {
             if (t.getTitle().equals(title)) {
-                t.setText(text);
+               text = t;
             }
         }
+        return text;
     }
 }

@@ -14,5 +14,7 @@
 <form method="post" action="logout">
     <input type="submit" value="Logout">
 </form>
+<br>
+<li><a href="curriculum">to mentors page</a></li>
 </body>
 </html>

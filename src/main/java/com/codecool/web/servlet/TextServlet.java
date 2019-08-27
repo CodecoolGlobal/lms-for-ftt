@@ -13,23 +13,25 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
-@WebServlet("/curriculum")
-public class CurriculumServlet extends AbstractServlet {
+@WebServlet("/protected/curriculum")
+public class TextServlet extends AbstractServlet {
     
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        PrintWriter out = resp.getWriter();
+        resp.setContentType("text/plain");
+        
+        
         try (Connection connection = getConnection(req.getServletContext())){
             DBTextDao textDao = new DBTextDao(connection);
             TextService textService = new TextService(textDao);
             
             HttpSession session = req.getSession(false);
             User user = (User) session.getAttribute("user");
-            /*String title = req.getParameter("title");
-            String text = req.getParameter("text");*/
-            boolean isPublished = Boolean.parseBoolean(req.getParameter("isPublished"));
             
             List<Text> texts = textService.getAllText();
             req.setAttribute("texts", texts);

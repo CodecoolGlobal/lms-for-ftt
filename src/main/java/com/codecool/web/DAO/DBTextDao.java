@@ -33,22 +33,22 @@ public class DBTextDao extends AbstractDao {
     
     public List<Text> loadAllTexts() throws SQLException {
         List<Text> allText = new ArrayList<>();
+        
+        String sql = "SELECT text_id, title, text, is_published FROM texts";
     
-        String sql = "SELECT title, text, is_published FROM texts";
-    
-        try (Statement statement = connection.createStatement(); ResultSet resultSet = statement.executeQuery(sql)) {
+        try (Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(sql)) {
             while (resultSet.next()) {
                 Text text = new Text(
+                    resultSet.getInt("text_id"),
                     resultSet.getString("title"),
-                    resultSet.getString("text"));
-                if (resultSet.getBoolean("ispublished")) {
-                    text.publish();
-                } else {
-                    text.unpublish();
-                }
+                    resultSet.getString("text"),
+                    resultSet.getBoolean("is_published"));
+                
                 allText.add(text);
             }
         }
+    
         return allText;
     }
 }

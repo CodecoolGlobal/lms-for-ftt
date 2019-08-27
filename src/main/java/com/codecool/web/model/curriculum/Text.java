@@ -25,6 +25,10 @@ public class Text {
         this.isPublished = isPublished;
     }
     
+    public int getId() {
+        return id;
+    }
+    
     public String getTitle() {
         return title;
     }
@@ -47,5 +51,10 @@ public class Text {
     
     public void unpublish() {
         isPublished = false;
+    }
+    
+    @Override
+    public String toString() {
+        return "Text [id: " + id + ", title: " + title + ", text: " + text + ", published?: " + isPublished + "]";
     }
 }
