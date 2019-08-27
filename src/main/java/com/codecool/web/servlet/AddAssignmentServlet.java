@@ -43,6 +43,8 @@ public class AddAssignmentServlet extends AbstractServlet {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    
+        resp.sendRedirect("curriculum");
     }
 
 
