@@ -12,16 +12,14 @@
 
 <h2>Add new Assignment</h2>
 
-<form action="add-assignment" method="post">
+<form action="add-text" method="post">
 
-                <p>Title:</p>
+                <p>Your title:</p>
                 <p><input class="box" type="text" name="title" autofocus></p>
 
-                <p>Question: </p>
-                <p><textarea rows="20" cols="20" name="question"></textarea></p>
+                <p>Type your text here: </p>
+                <p><textarea rows="20" cols="20" name="text"></textarea></p>
 
-                <p>Possible Max Score: </p>
-                <p><input type="number" min="1" max="10" name="max_score" placeholder=1></p>
                 <br>
                 <select name="is_published" size="1">
                         <option value="false">unpublished</option>

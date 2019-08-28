@@ -1,9 +1,9 @@
 package com.codecool.web.servlet;
 
-import com.codecool.web.DAO.DBAssignmentDao;
-import com.codecool.web.model.curriculum.Assignment;
+import com.codecool.web.DAO.DBTextDao;
+import com.codecool.web.model.curriculum.Text;
 import com.codecool.web.model.user.User;
-import com.codecool.web.service.AssignmentService;
+import com.codecool.web.service.TextService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,36 +15,34 @@ import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-
-@WebServlet("/protected/add-assignment")
-public class AddAssignmentServlet extends AbstractServlet {
+@WebServlet("/protected/add-text")
+public class AddTextServlet extends AbstractServlet {
     
     public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         PrintWriter out = resp.getWriter();
         resp.setContentType("text/plain");
         
         try (Connection connection = getConnection(req.getServletContext())){
-            DBAssignmentDao assignmentDao = new DBAssignmentDao(connection);
-            AssignmentService assignmentService = new AssignmentService(assignmentDao);
-        
-        
+            DBTextDao dbTextDao = new DBTextDao(connection);
+            TextService textService = new TextService(dbTextDao);
+    
             HttpSession session = req.getSession(false);
             User user = (User) session.getAttribute("user");
-        
-            if (req.getParameter("question") != null) {
+    
+            if (req.getParameter("text") != null) {
                 String title = req.getParameter("title");
-                String question = req.getParameter("question");
-                int maxScore = Integer.parseInt(req.getParameter("max_score"));
+                String text = req.getParameter("text");
                 Boolean isPublished = Boolean.getBoolean(req.getParameter("is_published"));
-            
-                Assignment assignment = new Assignment(title, question, isPublished, maxScore);
-                assignmentService.addAssignment(assignment);
+    
+                Text text1 = new Text(title, text, isPublished);
+                textService.addText(text1);
             }
+            
         } catch (SQLException e) {
             e.printStackTrace();
         }
     
         resp.sendRedirect("curriculum");
+        
     }
-
 }
