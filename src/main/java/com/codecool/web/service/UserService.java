@@ -32,10 +32,10 @@ public class UserService {
         return null;
 
     }
-    
+
     public String notValidated(String name, String email, String role, String passWord) throws SQLException {
         String validated = "newUser";
-        
+
         for (User user : getUsers()) {
             if ( user.getEmail().equals(email)) {
                 validated = "registered";
@@ -48,13 +48,13 @@ public class UserService {
     public void updateUser(User user) {
         //ellenőrizni van e már regisztált user
         ;
-        
+
     }
-    
+
     public void addUser(String name, String email, String role, String passwWord) throws  SQLException {
         userDao.addUser(name, email, role, passwWord);
     }
-    
+
     public boolean login(String email, String password) throws SQLException {
         for(User user : getUsers()){
             if(user.getEmail().equals(email) && user.getPassword().equals(password)){
@@ -62,5 +62,21 @@ public class UserService {
             }
         }
         return false;
+    }
+
+    public void modifyName(Integer id, String name){
+        try{
+            userDao.updateName(id, name);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void modifyMail(Integer id, String mail){
+        try{
+            userDao.updateMail(id, mail);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

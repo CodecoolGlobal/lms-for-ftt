@@ -4,23 +4,23 @@ public class Assignment {
     private int id;
     private String title;
     private String question;
+    private boolean isPublished;
     private int maxScore;
-    private boolean is_Published;
     
-    public Assignment(String title, String question, int maxScore, boolean is_Published) {
+    public Assignment(String title, String question, boolean isPublished, int maxScore) {
         this.id = id;
         this.title = title;
         this.question = question;
+        this.isPublished = false;
         this.maxScore = maxScore;
-        this.is_Published = false;
     }
     
-    public Assignment(int id, String title, String question, int maxScore, boolean is_Published) {
+    public Assignment(int id, String title, String question, boolean isPublished, int maxScore) {
         this.id = id;
         this.title = title;
         this.question = question;
+        this.isPublished = isPublished;
         this.maxScore = maxScore;
-        this.is_Published = is_Published;
     }
     
     public String getTitle() {
@@ -32,7 +32,7 @@ public class Assignment {
     }
     
     public boolean isPublished() {
-        return is_Published;
+        return isPublished;
     }
     
     public int getMaxScore() {
@@ -40,10 +40,10 @@ public class Assignment {
     }
     
     public void publish() {
-        is_Published = true;
+        isPublished = true;
     }
     
     public void unpublish() {
-        is_Published = false;
+        isPublished = false;
     }
 }

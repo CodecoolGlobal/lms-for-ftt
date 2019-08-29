@@ -2,8 +2,7 @@
 target
 *.iml
 *.swp
-*.ods
 *.csv
+*.ods
 *.js
 .gitignore
-

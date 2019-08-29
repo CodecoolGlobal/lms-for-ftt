@@ -11,16 +11,16 @@ public class DBUserDao extends AbstractDao {
     public DBUserDao(Connection connection) {
         super(connection);
     }
-    
+
     public List<User> findUsers() throws SQLException {
         List<User> users = new ArrayList<>();
-        
+
         String sql = "SELECT user_id, user_name, email, user_role, password FROM users";
         try (Statement stmnt = connection.createStatement();
              ResultSet resultSet = stmnt.executeQuery(sql)) {
-            
+
             while (resultSet.next()) {
-                int id = resultSet.getInt("user_id");
+                Integer id = resultSet.getInt("user_id");
                 String name = resultSet.getString("user_name");
                 String email = resultSet.getString("email");
                 Role role = Role.valueOf(resultSet.getString("user_role").toUpperCase());
@@ -28,9 +28,9 @@ public class DBUserDao extends AbstractDao {
                 users.add(new User(id, name, email, role, pw));
             }
         }
-    
+
     return users;}
-    
+
     public void addUser(String name, String email, String role, String password) throws SQLException {
         boolean autoCommit = connection.getAutoCommit();
         connection.setAutoCommit(false);
@@ -40,7 +40,7 @@ public class DBUserDao extends AbstractDao {
             prstmt.setString(2, email);
             prstmt.setString(3, role);
             prstmt.setString(4, password);
-            
+
             executeInsert(prstmt);
             connection.commit();
         } catch (SQLException e) {
@@ -50,26 +50,76 @@ public class DBUserDao extends AbstractDao {
             connection.setAutoCommit(autoCommit);
         }
     }
-    
+
     public User getUser(String email, String passWord) throws SQLException {
         User user = null;
-        
+
         try {
             for (User user1 : findUsers()) {
                 if (user1.getEmail().equals(email) && user1.getPassword().equals(passWord)) {
-                    int id = user1.getUserId();
+                    Integer id = user1.getUserId();
                     String name = user1.getName();
                     String mail = user1.getEmail();
                     Role role = Role.valueOf(user1.getRoleToString());
                     String pw = user1.getPassword();
-                    
+
                     return new User(id, name, mail, role, pw);
                 }
             }
         } catch (SQLException e) {
             throw e;
         }
-        
         return user;
+    }
+
+    public static List<User> getUsersList(Connection connection) throws SQLException{
+        List<User> userList = new ArrayList<>();
+        String sql = "SELECT user_id, user_name, email from Users";
+        try(Statement statement = connection.createStatement()){
+            //statement.executeQuery(sql);
+            ResultSet resultSet = statement.executeQuery(sql);
+            while (resultSet.next()){
+                String id = String.valueOf(resultSet.getInt("user_id"));
+                String name = resultSet.getString("user_name");
+                String mail = resultSet.getString("email");
+                userList.add(new User(Integer.valueOf(id), name, mail));
+            }
+        }
+        return userList;
+    }
+
+    public void updateName(Integer userId, String name) throws SQLException {
+        boolean autoCommit = connection.getAutoCommit();
+        connection.setAutoCommit(false);
+        String sql = "UPDATE users set user_name=? where user_id=?";
+        try(PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){
+            preparedStatement.setString(1, name);
+            preparedStatement.setInt(2, userId);
+            executeInsert(preparedStatement);
+            connection.commit();
+        }catch (SQLException e){
+            connection.rollback();
+            throw e;
+        }finally {
+            connection.setAutoCommit(autoCommit);
+        }
+    }
+
+    public void updateMail(Integer userId, String mail) throws SQLException{
+        boolean autoCommit = connection.getAutoCommit();
+        connection.setAutoCommit(false);
+        String sql = "UPDATE user set email=? where user_id=?";
+        try(PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){
+            preparedStatement.setString(1,mail);
+            preparedStatement.setInt(2, userId);
+            executeInsert(preparedStatement);
+            connection.commit();
+        }catch (SQLException e){
+            connection.rollback();
+            throw e;
+        }finally {
+            connection.setAutoCommit(autoCommit);
+        }
+
     }
 }
