@@ -37,7 +37,7 @@ public class AddAssignmentServlet extends AbstractServlet {
                 int maxScore = Integer.parseInt(req.getParameter("max_score"));
                 Boolean isPublished = Boolean.getBoolean(req.getParameter("is_published"));
             
-                Assignment assignment = new Assignment(title, question, isPublished, maxScore);
+                Assignment assignment = new Assignment(title, question, maxScore, isPublished);
                 assignmentService.addAssignment(assignment);
             }
         } catch (SQLException e) {

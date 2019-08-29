@@ -28,7 +28,7 @@ public class DBAssignmentDao extends AbstractDao {
             statement.setBoolean(4, isPublished);
             executeInsert(statement);
             int id = fetchGeneratedId(statement);
-            return new Assignment(id, assignment.getTitle(), assignment.getQuestion(), assignment.isPublished(), assignment.getMaxScore());
+            return new Assignment(id, assignment.getTitle(), assignment.getQuestion(), assignment.getMaxScore(), assignment.isPublished());
         } catch (SQLException ex) {
             connection.rollback();
             throw ex;
@@ -40,14 +40,15 @@ public class DBAssignmentDao extends AbstractDao {
     public List<Assignment> loadAllAssignments() throws SQLException {
         List<Assignment> allAssignments = new ArrayList<>();
     
-        String sql = "SELECT title, question, is_published, max_score FROM assignments";
+        String sql = "SELECT assignment_id,title, question, max_score, is_published FROM assignments";
     
         try (Statement statement = connection.createStatement(); ResultSet resultSet = statement.executeQuery(sql)) {
             while (resultSet.next()) {
-                Assignment assignment = new Assignment(resultSet.getString("title"),
-                resultSet.getString("question"),
-                resultSet.getBoolean("is_published"),
-                resultSet.getInt("max_score"));
+                Assignment assignment = new Assignment(resultSet.getInt("assignment_id"),
+                    resultSet.getString("title"),
+                    resultSet.getString("question"),
+                    resultSet.getInt("max_score"),
+                    resultSet.getBoolean("is_published"));
                 
                 
                 allAssignments.add(assignment);

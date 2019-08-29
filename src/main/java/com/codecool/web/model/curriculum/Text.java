@@ -4,13 +4,13 @@ public class Text {
     private int id;
     private String title;
     private String text;
-    private boolean isPublished;
+    private boolean is_Published;
     
     public Text(String title, String text, boolean isPublished) {
         this.id = id;
         this.title = title;
         this.text = text;
-        this.isPublished = false;
+        this.is_Published = false;
     }
     
     public Text(String title, String text) {
@@ -22,7 +22,7 @@ public class Text {
         this.id = id;
         this.title = title;
         this.text = text;
-        this.isPublished = isPublished;
+        this.is_Published = isPublished;
     }
     
     public int getId() {
@@ -38,7 +38,7 @@ public class Text {
     }
     
     public boolean isPublished() {
-        return isPublished;
+        return is_Published;
     }
     
     public void setText(String text) {
@@ -46,15 +46,15 @@ public class Text {
     }
     
     public void publish() {
-        isPublished = true;
+        is_Published = true;
     }
     
     public void unpublish() {
-        isPublished = false;
+        is_Published = false;
     }
     
     @Override
     public String toString() {
-        return "Text [id: " + id + ", title: " + title + ", text: " + text + ", published?: " + isPublished + "]";
+        return "Text [id: " + id + ", title: " + title + ", text: " + text + ", published?: " + is_Published + "]";
     }
 }
