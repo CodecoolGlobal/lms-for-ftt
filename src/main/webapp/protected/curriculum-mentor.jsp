@@ -20,7 +20,7 @@
         <a href="profile">Profile</a>
         <a href="../userList.jsp">User list</a>
         <a href="#">Student solutions</a>
-        <a href="#">Add text</a>
+        <a href="add-text.jsp">Add text</a>
         <a href="add-assignment.jsp">Add assignment</a>
         <a href="#">Attendance</a>
     </div>
@@ -36,11 +36,22 @@
         <c:forEach var="text" items="${texts}">
             <tr>
                 <td> ${text.getTitle()}</td>
-                <td> ${text.isPublished()}</td>
+                <td>
+                    <c:choose>
+                         <c:when test="${text.isPublished()}">
+                             <input type="checkbox" name="publish_text"
+                                    checked/>
+                         </c:when>
+                         <c:otherwise>
+                             <input type="checkbox" name="publish_text"
+                                    />
+                         </c:otherwise>
+                    </c:choose></td>
             </tr>
         </c:forEach>
     </table>
-</form>
+    <td><input type="submit" value="Submit"></td>
+</form:form>
 
 <h2>Assignment page list</h2>
 <table>
@@ -54,7 +65,16 @@
         <tr>
             <td> ${assignment.getTitle()}</td>
             <td> ${assignment.getMaxScore()}</td>
-            <td> ${assignment.isPublished()}</td>
+            <td> <c:choose>
+                       <c:when test="${assignment.isPublished()}">
+                           <input type="checkbox" name="publish_assignment"
+                                  checked/>
+                       </c:when>
+                       <c:otherwise>
+                           <input type="checkbox" name="publish_assignment"
+                                  />
+                       </c:otherwise>
+                  </c:choose></td>
         </tr>
     </c:forEach>
 </table>
