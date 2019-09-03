@@ -24,6 +24,6 @@
     <input type="submit" value="Logout">
 </form>
 <br>
-<li><a href="curriculum">to mentors page</a></li>
+<li><a href="curriculum">to main page</a></li>
 </body>
 </html>

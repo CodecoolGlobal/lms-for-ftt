@@ -18,7 +18,7 @@
     <div class="dropdown-content">
         <a href="curriculum">Curriculum</a>
         <a href="profile">Profile</a>
-        <a href="../userList.jsp">User list</a>
+        <a href="#">User list</a>
         <a href="#">Student solutions</a>
         <a href="add-text.jsp">Add text</a>
         <a href="add-assignment.jsp">Add assignment</a>

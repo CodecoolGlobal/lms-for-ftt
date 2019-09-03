@@ -56,4 +56,21 @@ public class DBAssignmentDao extends AbstractDao {
         }
         return allAssignments;
     }
+    
+    public void updatePublishing(int id, boolean isPublished) throws  SQLException {
+        boolean autoCommit = connection.getAutoCommit();
+        connection.setAutoCommit(false);
+        String sql = "UPDATE assignments SET isPublished=? WHERE page_id=?";
+        try (PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+            statement.setBoolean(1, isPublished);
+            statement.setInt(2, id);
+            executeInsert(statement);
+            connection.commit();
+        } catch (SQLException ex) {
+            connection.rollback();
+            throw ex;
+        } finally {
+            connection.setAutoCommit(autoCommit);
+        }
+    }
 }

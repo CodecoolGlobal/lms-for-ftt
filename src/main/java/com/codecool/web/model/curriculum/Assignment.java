@@ -46,4 +46,8 @@ public class Assignment {
     public void unpublish() {
         is_Published = false;
     }
+    
+    public int getId() {
+        return id;
+    }
 }

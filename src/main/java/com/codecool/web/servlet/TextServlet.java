@@ -47,8 +47,10 @@ public class TextServlet extends AbstractServlet {
             
             if (user.getRole().equals(Role.MENTOR)) {
                 req.getRequestDispatcher("curriculum-mentor.jsp").forward(req, resp);
-            } else {
+            } else if (user.getRole().equals(Role.STUDENT)){
                 req.getRequestDispatcher("curriculum-student.jsp").forward(req, resp);
+            }else{
+                System.out.println("error here");
             }
             
         } catch (SQLException e) {
