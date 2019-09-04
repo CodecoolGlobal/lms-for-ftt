@@ -104,11 +104,28 @@ public class DBUserDao extends AbstractDao {
             connection.setAutoCommit(autoCommit);
         }
     }
+    
+    public void updatePassword(Integer userId, String password) throws SQLException{
+        boolean autoCommit = connection.getAutoCommit();
+        connection.setAutoCommit(false);
+        String sql = "UPDATE users SET password=? where user_id=?";
+        try(PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){
+            preparedStatement.setString(1, password);
+            preparedStatement.setInt(2, userId);
+            executeInsert(preparedStatement);
+            connection.commit();
+        }catch (SQLException e){
+            connection.rollback();
+            throw e;
+        }finally {
+            connection.setAutoCommit(autoCommit);
+        }
+    }
 
     public void updateMail(Integer userId, String mail) throws SQLException{
         boolean autoCommit = connection.getAutoCommit();
         connection.setAutoCommit(false);
-        String sql = "UPDATE user set email=? where user_id=?";
+        String sql = "UPDATE users SET email=? WHERE user_id=?";
         try(PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){
             preparedStatement.setString(1,mail);
             preparedStatement.setInt(2, userId);

@@ -71,6 +71,14 @@ public class UserService {
             e.printStackTrace();
         }
     }
+    
+    public void modifyPassword(Integer id, String password){
+        try{
+            userDao.updatePassword(id, password);
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
 
     public void modifyMail(Integer id, String mail){
         try{

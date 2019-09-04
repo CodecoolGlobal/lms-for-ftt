@@ -68,4 +68,8 @@ public class User {
     public String getRoleToString() {
         return roleToString;
     }
+    
+    public void setPassword(String password) {
+        this.password = password;
+    }
 }
