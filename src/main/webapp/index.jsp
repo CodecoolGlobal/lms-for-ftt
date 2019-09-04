@@ -5,26 +5,29 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <title>User Data</title>
-    <link rel="stylesheet" type="text/css" href="css/regstyle.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 
 <body>
 <h1>Registration Form</h1>
-<div class="ex">
-    <form action="RegistrationServlet" method="post">
+<h1>
 
-        <p>Name: <input class="tab" type="text" name="user_name" ></p>
-        <p>E-mail: <input class="tab" type="text" name="email" ></p>
-        <p>Password: <input class="tab" type="password" name="password" ></p>
-        <select class="button" name = "role">
-            <option>MENTOR</option>
-            <option>STUDENT</option>
-        </select>
-        <input class="lbutton" type="submit" value="register" />
-        <br>
-        <br>
-    </form>
-</div>
-<li><a href="login.jsp">LOGIN</a> </li>
+    <div class="ex">
+        <form action="RegistrationServlet" method="post">
+
+            <p><input class="tab" type="text" name="user_name" placeholder="User name" ></p>
+            <p><input class="tab" type="text" name="email" placeholder="E-mail address" ></p>
+            <p><input class="tab" type="password" name="password" placeholder="Password"></p>
+            <select class="button" name = "role">
+                <option>MENTOR</option>
+                <option>STUDENT</option>
+            </select>
+            <input class="lbutton" type="submit" value="register" />
+            <br>
+            <br>
+        </form>
+    </div>
+    <li><a href="login.jsp">LOGIN</a> </li>
+</h1>
 </body>
 </html>
