@@ -1,4 +1,4 @@
-x0<%@ page contentType="text/html; charset=UTF-8" %>
+<%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page import="java.util.List" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page import="com.codecool.web.model.user.User" %>
@@ -16,7 +16,7 @@ x0<%@ page contentType="text/html; charset=UTF-8" %>
 <div class="navbar" align="center">
     <a href="protected/profil.jsp">profile</a>
     <a href="userlist">List users</a>
-    <a href="login">Logout</a>
+    <a href="logout">Logout</a>
 </div>
 <h1>Users</h1>
 <br>

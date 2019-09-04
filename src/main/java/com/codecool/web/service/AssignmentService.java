@@ -33,22 +33,17 @@ public final class AssignmentService {
     }
     
     public void publishAssignment(String[] publishA) throws SQLException {
-        for (Assignment assignment : getAllAssignments()) {
-            for (String st : publishA) {
-                if (st.substring(st.length() -2) == "ue") {
-                    int id = Integer.parseInt(st.substring(0, st.length() - 4));
-                    if (id == assignment.getId()) {
-                        assignment.publish();
+        for (String st : publishA) {
+            for (Assignment a : getAllAssignments()) {
+                int id = Integer.parseInt(st);
+                if (id == a.getId()) {
+                    if (a.isPublished()) {
+                        assignmentDao.updatePublishing(id,  false);
+                    } else if (!a.isPublished()){
                         assignmentDao.updatePublishing(id,  true);
                     }
-                
-                } else {
-                    int id = Integer.parseInt(st.substring(0, st.length() - 5));
-                    if (id == assignment.getId()) {
-                        assignment.unpublish();
-                        assignmentDao.updatePublishing(id, false);
-                    }
                 }
+            
             }
         }
     }

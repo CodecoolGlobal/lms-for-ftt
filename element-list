@@ -1,8 +1,0 @@
-com.codecool.web.DAO
-com.codecool.web.filter
-com.codecool.web.listener
-com.codecool.web.model.curriculum
-com.codecool.web.model.enums
-com.codecool.web.model.user
-com.codecool.web.service
-com.codecool.web.servlet

@@ -18,7 +18,7 @@
     <div class="dropdown-content">
         <a href="curriculum">Curriculum</a>
         <a href="profile">Profile</a>
-        <a href="#">User list</a>
+        <a href="userlist">User list</a>
         <a href="#">Student solutions</a>
         <a href="add-text.jsp">Add text</a>
         <a href="add-assignment.jsp">Add assignment</a>
@@ -26,25 +26,27 @@
     </div>
 </div>
 <h2>Text page list</h2>
-<form action="curriculum" method="get">
+<form action="publishServlet" method="post">
     <table>
         <tr>
             <th>Title</th>
-            <th>Is published</th>
+            <th>Published</th>
+            <th> Set to change</th>
         </tr>
 
         <c:forEach var="text" items="${texts}">
             <tr>
                 <td> ${text.getTitle()}</td>
+                <td> ${text.isPublished()}</td>
                 <td>
                     <c:choose>
                          <c:when test="${text.isPublished()}">
-                             <input type="checkbox" name="publish_text"
-                                    checked/>
+                             <input type="checkbox" name="publish_text" value= "${text.getId()}"
+                                    unchecked/>
                          </c:when>
                          <c:otherwise>
-                             <input type="checkbox" name="publish_text"
-                                    />
+                              <input type="checkbox" name="publish_text" value= "${text.getId()}"
+                                     unchecked/>
                          </c:otherwise>
                     </c:choose></td>
             </tr>
@@ -59,20 +61,23 @@
         <th>Title</th>
         <th>Maximum score</th>
         <th>Is published</th>
+        <th> Set to change</th>
     </tr>
 
     <c:forEach var="assignment" items="${assignments}">
         <tr>
             <td> ${assignment.getTitle()}</td>
             <td> ${assignment.getMaxScore()}</td>
+            <td> ${assignment.isPublished()}</td>
+
             <td> <c:choose>
                        <c:when test="${assignment.isPublished()}">
-                           <input type="checkbox" name="publish_assignment"
-                                  checked/>
+                           <input type="checkbox" name="publish_assignment" value="${assignment.getId()}"
+                                  unchecked/>
                        </c:when>
                        <c:otherwise>
-                           <input type="checkbox" name="publish_assignment"
-                                  />
+                           <input type="checkbox" name="publish_assignment" value="${assignment.getId()}"
+                                  unchecked/>
                        </c:otherwise>
                   </c:choose></td>
         </tr>

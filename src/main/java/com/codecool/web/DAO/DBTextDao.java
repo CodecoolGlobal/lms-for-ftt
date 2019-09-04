@@ -34,7 +34,7 @@ public class DBTextDao extends AbstractDao {
     public List<Text> loadAllTexts() throws SQLException {
         List<Text> allText = new ArrayList<>();
         
-        String sql = "SELECT text_id, title, text, is_published FROM texts";
+        String sql = "SELECT text_id, title, text, is_published FROM texts ORDER BY text_id";
     
         try (Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sql)) {
@@ -55,7 +55,7 @@ public class DBTextDao extends AbstractDao {
     public void updatePublishing(int id, boolean isPublished) throws SQLException {
         boolean autoCommit = connection.getAutoCommit();
         connection.setAutoCommit(false);
-        String sql = "UPDATE texts SET isPublished=? WHERE page_id=?";
+        String sql = "UPDATE texts SET is_published=? WHERE text_id=?";
         try (PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             statement.setBoolean(1, isPublished);
             statement.setInt(2, id);

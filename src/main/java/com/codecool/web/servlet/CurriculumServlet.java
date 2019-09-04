@@ -22,7 +22,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 @WebServlet("/protected/curriculum")
-public class TextServlet extends AbstractServlet {
+public class CurriculumServlet extends AbstractServlet {
     
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         PrintWriter out = resp.getWriter();
@@ -49,8 +49,6 @@ public class TextServlet extends AbstractServlet {
                 req.getRequestDispatcher("curriculum-mentor.jsp").forward(req, resp);
             } else if (user.getRole().equals(Role.STUDENT)){
                 req.getRequestDispatcher("curriculum-student.jsp").forward(req, resp);
-            }else{
-                System.out.println("error here");
             }
             
         } catch (SQLException e) {

@@ -1,1 +1,0 @@
-packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"com.codecool.web.DAO"},{"l":"com.codecool.web.filter"},{"l":"com.codecool.web.listener"},{"l":"com.codecool.web.model.curriculum"},{"l":"com.codecool.web.model.enums"},{"l":"com.codecool.web.model.user"},{"l":"com.codecool.web.service"},{"l":"com.codecool.web.servlet"}]

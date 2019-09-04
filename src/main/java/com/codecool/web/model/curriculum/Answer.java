@@ -1,6 +1,7 @@
 package com.codecool.web.model.curriculum;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 public class Answer {
@@ -8,13 +9,13 @@ public class Answer {
     private int userID;
     private String solution;
     private int score;
-    private LocalDate submissionDate;
+    private LocalDateTime submissionDate;
     
-    public Answer(int assignmentID, int userID, String solution, LocalDate submissionDate) {
+    public Answer(int assignmentID, int userID, String solution, LocalDateTime submissionDate) {
         this.assignmentID = assignmentID;
         this.userID = userID;
         this.solution = solution;
-        this.submissionDate = LocalDate.now();
+        this.submissionDate = LocalDateTime.now();
     }
     
     public Answer(int assignmentID, String solution) {
@@ -38,7 +39,7 @@ public class Answer {
         return score;
     }
     
-    public LocalDate getSubmissionDate() {
+    public LocalDateTime getSubmissionDate() {
         return submissionDate;
     }
     

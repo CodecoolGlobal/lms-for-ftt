@@ -14,7 +14,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-@WebServlet("/userlist")
+@WebServlet("/protected/userlist")
 public class UserListServlet extends AbstractServlet {
 
     @Override

@@ -24,4 +24,9 @@ public class LogoutServlet extends HttpServlet {
          */
         resp.sendRedirect("..");
     }
+    
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        doPost(request, response);
+    }
 }

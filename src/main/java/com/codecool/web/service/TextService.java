@@ -33,22 +33,17 @@ public final class TextService {
     }
     
     public void publishText(String[] publishT) throws SQLException {
-        for (Text t : getAllText()) {
-            for (String st : publishT) {
-                if (st.substring(st.length() -2) == "ue") {
-                    int id = Integer.parseInt(st.substring(0, st.length() - 4));
-                    if (id == t.getId()) {
-                        t.publish();
+        for (String st : publishT) {
+            for (Text t : getAllText()) {
+                int id = Integer.parseInt(st);
+                if (id == t.getId()) {
+                    if (t.isPublished()) {
+                        textDao.updatePublishing(id,  false);
+                    } else if (!t.isPublished()){
                         textDao.updatePublishing(id,  true);
                     }
-                    
-                } else {
-                    int id = Integer.parseInt(st.substring(0, st.length() - 5));
-                    if (id == t.getId()) {
-                        t.unpublish();
-                        textDao.updatePublishing(id,  false);
-                    }
                 }
+                
             }
         }
     }

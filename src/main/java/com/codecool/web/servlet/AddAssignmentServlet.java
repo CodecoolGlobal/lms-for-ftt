@@ -40,11 +40,10 @@ public class AddAssignmentServlet extends AbstractServlet {
                 Assignment assignment = new Assignment(title, question, maxScore, isPublished);
                 assignmentService.addAssignment(assignment);
             }
+            req.getRequestDispatcher("curriculum").forward(req, resp);
+            
         } catch (SQLException e) {
             e.printStackTrace();
         }
-    
-        resp.sendRedirect("curriculum");
     }
-
 }

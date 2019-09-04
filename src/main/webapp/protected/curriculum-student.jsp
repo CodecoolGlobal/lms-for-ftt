@@ -20,8 +20,8 @@
         <a href="profile">Profile</a>
         <a href="#">User list</a>
         <a href="#">Student solutions</a>
-        <a href="add-text.jsp">Add text</a>
-        <a href="add-assignment.jsp">Add assignment</a>
+        <a href="#">Add text</a>
+        <a href="add-answer.jsp">Accomplish assignment</a>
         <a href="#">Attendance</a>
     </div>
 </div>
