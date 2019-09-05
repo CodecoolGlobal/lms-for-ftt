@@ -5,6 +5,7 @@ import com.codecool.web.model.user.User;
 
 import com.codecool.web.model.enums.Role;
 
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +21,7 @@ public class UserService {
     }
 
     public List<User> getUsers() throws SQLException {
-        return userDao.findUsers();
+        return userDao.getUsersList();
     }
 
     public User getUser(String mail) throws SQLException{
@@ -56,7 +57,7 @@ public class UserService {
     }
 
     public boolean login(String email, String password) throws SQLException {
-        for(User user : getUsers()){
+        for(User user : userDao.findUsers()){
             if(user.getEmail().equals(email) && user.getPassword().equals(password)){
                 return true;
             }
@@ -80,13 +81,6 @@ public class UserService {
         }
     }
 
-    public void modifyPassword(Integer id, String password){
-        try{
-            userDao.updatePassword(id, password);
-        }catch (SQLException e){
-            e.printStackTrace();
-        }
-    }
     public void modifyMail(Integer id, String mail){
         try{
             userDao.updateMail(id, mail);

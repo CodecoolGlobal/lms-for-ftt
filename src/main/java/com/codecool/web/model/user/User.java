@@ -44,7 +44,15 @@ public class User {
         this.role = role;
         this.password = password;
     }
-
+    
+    public User(Integer userId, String name, String email, String roleToString, String password) {
+        this.userId = userId;
+        this.name = name;
+        this.email = email;
+        this.roleToString = roleToString;
+        this.password = password;
+    }
+    
     public User() {
 
     }
@@ -71,9 +79,5 @@ public class User {
 
     public String getRoleToString() {
         return roleToString;
-    }
-    
-    public void setPassword(String password) {
-        this.password = password;
     }
 }

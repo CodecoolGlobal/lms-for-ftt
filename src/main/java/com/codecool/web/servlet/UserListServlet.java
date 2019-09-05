@@ -19,8 +19,11 @@ public class UserListServlet extends AbstractServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        
         try (Connection connection = getConnection(request.getServletContext())) {
-            request.setAttribute("userList", DBUserDao.getUsersList(connection));
+            DBUserDao userDao = new DBUserDao(connection);
+            UserService userService = new UserService(userDao);
+            request.setAttribute("userList", userService.getUsers());
 
         } catch (SQLException e) {
             e.getMessage();
