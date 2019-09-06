@@ -43,8 +43,6 @@ public class RegistrationServlet extends AbstractServlet {
                 user = us.getUser(mail);
                 session.setAttribute("user", user);
     
-                //request.setAttribute("user", user);
-    
                 RequestDispatcher rd = request.getRequestDispatcher("home.jsp");
                 rd.forward(request, response);
             } else if(us.notValidated(name, mail, role, password).equals("empty")) {
