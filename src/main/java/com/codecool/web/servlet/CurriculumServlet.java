@@ -19,6 +19,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet("/protected/curriculum")
@@ -40,14 +41,31 @@ public class CurriculumServlet extends AbstractServlet {
             User user = (User) session.getAttribute("user");
             
             List<Text> texts = textService.getAllText();
-            req.setAttribute("texts", texts);
     
             List<Assignment> assignments = assignmentService.getAllAssignments();
-            req.setAttribute("assignments", assignments);
             
             if (user.getRole().equals(Role.MENTOR)) {
+                req.setAttribute("texts", texts);
+                req.setAttribute("assignments", assignments);
                 req.getRequestDispatcher("curriculum-mentor.jsp").forward(req, resp);
             } else if (user.getRole().equals(Role.STUDENT)){
+                List<Text> tempTexts = new ArrayList<>();
+                List<Assignment> tempAs = new ArrayList<>();
+                
+                for (Text t : texts) {
+                    if (t.isPublished()) {
+                        tempTexts.add(new Text(t.getTitle(), t.getText()));
+                    }
+                }
+                req.setAttribute("texts", tempTexts);
+    
+                for (Assignment a: assignments) {
+                    if (a.isPublished()) {
+                        tempAs.add(new Assignment(a.getTitle(), a.getQuestion(), a.getMaxScore(), a.isPublished()));
+                    }
+                }
+                req.setAttribute("assignments", tempAs);
+                
                 req.getRequestDispatcher("curriculum-student.jsp").forward(req, resp);
             }
             

@@ -60,7 +60,7 @@ public class DBAssignmentDao extends AbstractDao {
     public void updatePublishing(int id, boolean isPublished) throws  SQLException {
         boolean autoCommit = connection.getAutoCommit();
         connection.setAutoCommit(false);
-        String sql = "UPDATE assignments SET is_published=? WHERE assignment_id=?";
+        String sql = "UPDATE assignments SET is_published=? WHERE assignment_id= ?";
         try (PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             statement.setBoolean(1, isPublished);
             statement.setInt(2, id);
@@ -72,5 +72,31 @@ public class DBAssignmentDao extends AbstractDao {
         } finally {
             connection.setAutoCommit(autoCommit);
         }
+    }
+    
+    public Assignment getAssignmentById(Connection conn, int id) throws SQLException {
+        Assignment tempAssignment = null;
+        
+        String sql = "SELECT * FROM assignments WHERE assignment_id= " + id;
+        
+        try (Statement statement = conn.createStatement()){
+            statement.executeQuery(sql);
+            ResultSet rs = statement.executeQuery(sql);
+            
+            while (rs.next()) {
+                int id1 = rs.getInt("assignment_id");
+                String title = rs.getString("title");
+                String question = rs.getString("question");
+                int maxScore = rs.getInt("max_score");
+                boolean published = rs.getBoolean("is_published");
+                tempAssignment = new Assignment(id1, title, question, maxScore, published);
+            }
+            
+            if (tempAssignment == null) {
+                throw new SQLException("There should something be wrong! No assignment is impossible.");
+            }
+        }
+        
+        return tempAssignment;
     }
 }

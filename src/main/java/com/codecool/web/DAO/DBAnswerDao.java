@@ -22,7 +22,7 @@ public class DBAnswerDao extends AbstractDao {
         connection.setAutoCommit(false);
         
         String sql = "INSERT INTO answers (assignment_id, user_id, answer, submission_date) VALUES(?, ?, ?, ?)";
-        try (PreparedStatement prStm = connection.prepareStatement(sql)) {
+        try (PreparedStatement prStm = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             prStm.setInt(1, assignmentId);
             prStm.setInt(2, userId);
             prStm.setString(3, solution);
@@ -73,7 +73,7 @@ public class DBAnswerDao extends AbstractDao {
         return solutions;
     }
     
-    public List<Answer> answersByUser(User user) throws SQLException {
+    public List<Answer> answersByUser(Connection connection, User user) throws SQLException {
         List<Answer> solutions = new ArrayList<>();
         int id = user.getUserId();
     
@@ -82,7 +82,7 @@ public class DBAnswerDao extends AbstractDao {
     
         String sql = "SELECT * FROM answers WHERE user_id= ?";
         try (PreparedStatement prStm = connection.prepareStatement(sql)) {
-            prStm.setInt(2, id);
+            prStm.setInt(1, id);
             connection.commit();
     
             ResultSet rs = prStm.executeQuery();
@@ -108,6 +108,32 @@ public class DBAnswerDao extends AbstractDao {
         }
         
         return solutions;
+    }
+    
+    public boolean isAnswered(Connection conn, int assignmentId, int userId) throws SQLException {
+        String sql = "SELECT assignment_id, user_id FROM answers WHERE assignment_id=? AND user_id=?;";
+        
+        try (PreparedStatement prStmt = conn.prepareStatement(sql)) {
+            prStmt.setInt(1, assignmentId);
+            prStmt.setInt(2, userId);
+            ResultSet rs = prStmt.executeQuery();
+            return rs.next();
+        }
+    }
+    
+    public List<Answer> answersByAssignmentId(Connection conn, int assignmentId) throws SQLException {
+        List<Answer> listByAsId = new ArrayList<>();
+        
+        String sql = "SELECT * FROM answers WHERE assignment_id=?";
+        try (PreparedStatement prStmt = conn.prepareStatement(sql)) {
+            prStmt.setInt(1, assignmentId);
+            ResultSet rs = prStmt.executeQuery(sql);
+            while (rs.next()) {
+                listByAsId.add(new Answer(rs.getInt(1), rs.getInt(2), rs.getString(3), localDateFromTimestamp(rs.getTimestamp(4))));
+            }
+            
+            return listByAsId;
+        }
     }
     
     private LocalDateTime localDateFromTimestamp(Timestamp timestamp) {

@@ -3,6 +3,7 @@ package com.codecool.web.service;
 import com.codecool.web.DAO.DBAssignmentDao;
 import com.codecool.web.model.curriculum.Assignment;
 
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -46,5 +47,9 @@ public final class AssignmentService {
             
             }
         }
+    }
+    
+    public Assignment getById(Connection conn, int id) throws  SQLException {
+        return assignmentDao.getAssignmentById(conn, id);
     }
 }
