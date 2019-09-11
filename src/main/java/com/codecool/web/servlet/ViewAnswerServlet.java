@@ -22,7 +22,7 @@ public class ViewAnswerServlet extends AbstractServlet {
             
             id = req.getParameter("id");
             req.setAttribute("id", id);
-            req.setAttribute("answerlist", answerService.listByAssignmentId(conn, Integer.parseInt(id)));
+            req.setAttribute("answerList", answerService.listByAssignmentId(conn, Integer.parseInt(id)));
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -31,8 +31,8 @@ public class ViewAnswerServlet extends AbstractServlet {
     }
     
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String givenScore = req.getParameter("givenscores");
-        req.setAttribute("givenscores", givenScore);
+        String givenScore = req.getParameter("givenScores");
+        req.setAttribute("givenScores", givenScore);
     
         req.getRequestDispatcher("show-answers.jsp").forward(req, resp);
     }

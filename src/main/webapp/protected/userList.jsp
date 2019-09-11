@@ -14,7 +14,7 @@
 <body>
 
 <div class="navbar" align="center">
-    <a href="protected/profil.jsp">profile</a>
+    <a href="profil.jsp">profile</a>
     <a href="userlist">List users</a>
     <a href="logout">Logout</a>
 </div>

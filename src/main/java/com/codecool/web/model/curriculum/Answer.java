@@ -1,9 +1,8 @@
 package com.codecool.web.model.curriculum;
 
-import java.io.Serializable;
 import java.time.LocalDateTime;
 
-public class Answer implements Serializable {
+public class Answer {
     private int assignmentID;
     private int userID;
     private String solution;
