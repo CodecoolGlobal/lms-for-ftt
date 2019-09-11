@@ -76,7 +76,7 @@
                     <tr>
                         <td>
                             <p>Password: <c:out value="${user.password}"/></p>
-                            <form id="editPassword" action="editPassword" method="get" class="hide_form">
+                            <form id="editPassword" action="editPassword" method="post" class="hide_form">
                                 <input class="popupbox" type = "text" name = "passw">
                                 <input class="popupbutton" type = "submit" value = "Save" />
                             </form>

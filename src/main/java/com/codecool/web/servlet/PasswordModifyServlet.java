@@ -20,7 +20,7 @@ import java.sql.SQLException;
 public class PasswordModifyServlet extends AbstractServlet {
 
 
-    /*protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try(Connection connection = getConnection(request.getServletContext()) ) {
             DBUserDao dbUserDao = new DBUserDao(connection);
             UserService userService = new UserService(dbUserDao);
@@ -34,7 +34,7 @@ public class PasswordModifyServlet extends AbstractServlet {
             e.printStackTrace();
         }
 
-    }*/
+    }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.getRequestDispatcher("profil.jsp").forward(request, response);
