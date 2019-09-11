@@ -241,3 +241,113 @@ select {
 .desc p{
     text-align: center;}
 
+.header {
+    margin: auto;
+    min-height: 150px;
+    text-align:center;
+    width:100%;
+    background-position: center;
+    background-size: cover;
+}
+
+.svg-wrapper {
+    position: relative;
+    top: 120px;
+    transform: translateY(-50%);
+    margin:0 auto;
+    width: 320px;
+}
+
+.shape {
+    stroke-dasharray: 140540;
+    stroke-dashoffset: -474;
+    stroke-width: 5px;
+    fill: transparent;
+    stroke: black;
+    border-bottom: 5px solid black;
+    transition: stroke-width 1s, stroke-dashoffset 1s, stroke-dasharray 1s;
+}
+
+.headertext {
+    font-family: 'Megrim', cursive;
+    font-weight: 800;
+    font-size: 30px;
+    line-height: 32px;
+    letter-spacing: 8px;
+    color: black;
+    top: -50px;
+    position: relative;
+    text-transform: uppercase;
+}
+
+.headerlink {
+    color: black;
+}
+
+.headerlink:hover {
+    color: black;
+}
+
+.svg-wrapper:hover .shape {
+    stroke-width: 2px;
+    stroke-dashoffset: 0;
+    stroke-dasharray: 760;
+}
+
+/* NAVIGATION */
+
+nav {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 100;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    background: #221c5a;
+    margin:auto;
+    padding:0px;
+    position:relative;
+    text-align:center;
+    width:100%;
+    animation-name: fadeIn;
+    animation-duration: 1.2s;
+}
+
+.themeButton {
+    display:inline-block;
+    right: 1%;
+    position:relative;
+    float:right;
+    top:-40px;
+    text-transform: none;
+    font-size: 10px;
+    color:rgba(255,255,255,0.8);
+    cursor:pointer;
+
+    width: 80px;
+    padding: 0px 0px;
+    border: transparent;
+    background: #221c5a;
+    outline: transparent;
+}
+
+nav ul {
+    list-style:none;
+    margin:0px auto;
+    padding:0px;
+}
+
+nav li {
+    color: #ffffff;
+    display:inline-block;
+    font-size:18px;
+    margin:0px auto;
+    padding: 10px 5px 5px 5px;
+}
+
+nav li:hover {
+    text-decoration: none;
+    background:rgba(255,255,255,0.2);
+}
+
+.marked {
+    border-bottom:2px solid #ffffff;
+}

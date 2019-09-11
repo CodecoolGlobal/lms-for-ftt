@@ -11,14 +11,14 @@ public final class DBUserDao extends AbstractDao {
     public DBUserDao(Connection connection) {
         super(connection);
     }
-    
+
     public List<User> findUsers() throws SQLException {
         List<User> users = new ArrayList<>();
-        
+
         String sql = "SELECT user_id, user_name, email, user_role, password FROM users";
         try (Statement stmnt = connection.createStatement();
              ResultSet resultSet = stmnt.executeQuery(sql)) {
-            
+
             while (resultSet.next()) {
                 Integer id = resultSet.getInt("user_id");
                 String name = resultSet.getString("user_name");
@@ -28,10 +28,10 @@ public final class DBUserDao extends AbstractDao {
                 users.add(new User(id, name, email, role, pw));
             }
         }
-        
+
         return users;
     }
-    
+
     public void addUser(String name, String email, String role, String password) throws SQLException {
         boolean autoCommit = connection.getAutoCommit();
         connection.setAutoCommit(false);
@@ -61,7 +61,7 @@ public final class DBUserDao extends AbstractDao {
                     Integer id = user1.getUserId();
                     String name = user1.getName();
                     String mail = user1.getEmail();
-                    Role role = Role.valueOf(user1.getRoleToString());
+                    Role role = user1.getRole();
                     String pw = user1.getPassword();
 
                     return new User(id, name, mail, role, pw);
@@ -82,7 +82,7 @@ public final class DBUserDao extends AbstractDao {
                 String id = String.valueOf(resultSet.getInt("user_id"));
                 String name = resultSet.getString("user_name");
                 String mail = resultSet.getString("email");
-                String role = resultSet.getString("user_role");
+                Role role = Role.valueOf(resultSet.getString("user_role"));
                 String pw = resultSet.getString("password");
                 userList.add(new User(Integer.valueOf(id), name, mail, role, pw));
             }
@@ -130,6 +130,23 @@ public final class DBUserDao extends AbstractDao {
         String sql = "UPDATE users SET email=? WHERE user_id=?";
         try(PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){
             preparedStatement.setString(1,mail);
+            preparedStatement.setInt(2, userId);
+            executeInsert(preparedStatement);
+            connection.commit();
+        }catch (SQLException e){
+            connection.rollback();
+            throw e;
+        }finally {
+            connection.setAutoCommit(autoCommit);
+        }
+
+    }
+    public void updateRole(Integer userId, String role) throws SQLException{
+        boolean autoCommit = connection.getAutoCommit();
+        connection.setAutoCommit(false);
+        String sql = "UPDATE users SET user_role=? WHERE user_id=?";
+        try(PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){
+            preparedStatement.setString(1,role);
             preparedStatement.setInt(2, userId);
             executeInsert(preparedStatement);
             connection.commit();

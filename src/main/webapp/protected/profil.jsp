@@ -7,27 +7,47 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="style2.css">
     <title>User profil</title>
-    <script type="text/javascript">
-        function editName() {
-            var popup = document.getElementById("editName");
-            popup.classList.toggle("show");
-        }
-        function editMail() {
-            var popup = document.getElementById("editMail");
-            popup.classList.toggle("show");
-        }
-        function editPassword() {
-            var popup = document.getElementById("editPassword");
-            popup.classList.toggle("show");
-        }
-        function editRole() {
-            var popup = document.getElementById("editRole");
-            popup.classList.toggle("show");
 
-        }
-    </script>
 </head>
 <body>
+<script type="text/javascript">
+    function editName() {
+        var popup = document.getElementById("editName");
+        popup.classList.toggle("show");
+    }
+    function editMail() {
+        var popup = document.getElementById("editMail");
+        popup.classList.toggle("show");
+    }
+    function editPassword() {
+        var popup = document.getElementById("editPassword");
+        popup.classList.toggle("show");
+    }
+    function editRole() {
+        var popup = document.getElementById("editRole");
+        popup.classList.toggle("show");
+
+    }
+</script>
+<nav>
+    <ul>
+        <a href="profile.jsp"><li class="marked">Profile</li></a>
+        <a href="userlist"><li>UserList</li></a>
+        <a href="curriculum"><li>Curriculum</li></a>
+        <c:choose>
+            <c:when test="${user.role == 'STUDENT'}">
+                <a href="assignments"><li>Assignments</li></a>
+                <a href="stats"><li>Stats</li></a>
+            </c:when>
+            <c:otherwise>
+                <a href="attendance"><li>Attendance</li></a>
+                <a href="solutions"><li>Student Solutions</li></a>
+            </c:otherwise>
+        </c:choose>
+    </ul>
+</nav>
+<jsp:include page="header.jsp" />
+
 <div class="wrapper">
     <div class="content">
 
@@ -46,7 +66,10 @@
                         <td>
                             <p>Role: <c:out value="${user.role}"/></p>
                             <form id="editRole" action="editRole" method="post" class="hide_form">
-                                <input class="popupbox" type = "text" name = "name">
+                                <label for="mentor" name=rbutton>Mentor</label>
+                                <input type="radio" name="position" value="mentor" id="radio1">
+                                <label for="student" name=rbutton>Student</label>
+                                <input type="radio" name="position" value="student" id="radio2">
                                 <input class="popupbutton" type = "submit" value = "Save" />
                             </form>
                         <td><i class="fa fa-spinner fa-spin fa-3x fa-fw" onclick="editRole()" style="font-size:24px; cursor:pointer"></i></td>

@@ -11,9 +11,12 @@ import java.io.IOException;
 
 @WebFilter("/protected/*")
 public final class SessionFilter implements Filter {
+    private ServletContext servletContext;
 
     @Override
     public void init(FilterConfig filterConfig){
+        this.servletContext = filterConfig.getServletContext();
+        System.out.println("RoleFilter initialized");
     }
 
 
@@ -21,13 +24,26 @@ public final class SessionFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain filterChain)throws IOException, ServletException{
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse resp = (HttpServletResponse) response;
-        HttpSession session = req.getSession();
-        User user =(User) session.getAttribute("user");
+        HttpSession session = req.getSession(false);
+        String contextPath = servletContext.getContextPath();
+        String loginURI = contextPath+ "/login";
+        String requestURI = req.getRequestURI();
+        String registerURI = contextPath;
+       // User user =(User) session.getAttribute("user");
+
+        if((session != null && session.getAttribute("user") !=null)||requestURI.startsWith(contextPath+"/resources/")||
+            req.getRequestURI().equals(loginURI) || req.getRequestURI().equals(registerURI)){
+            filterChain.doFilter(request, response);
+        }else{
+            resp.sendRedirect(loginURI);
+        }
+
+        /*
         if(user == null){
             resp.sendRedirect("../login.jsp");
         } else {
             filterChain.doFilter(req, resp);
-        }
+        }*/
     }
 
     @Override

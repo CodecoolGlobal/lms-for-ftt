@@ -7,7 +7,7 @@
         <p>Welcome ${user.getName()}! You can see and edit your basic data and track your progress here.</p>
         <p>Name: ${user.getName()}</p>
         <c:choose>
-            <c:when test="${user.getClass().simpleName == 'Student'}">
+            <c:when test="${user.getClass().simpleName == 'student'}">
                 <p>Role: Student</p>
             </c:when>
             <c:otherwise>
