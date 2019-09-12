@@ -67,11 +67,9 @@
                     <tr>
                         <td>
                             <p>Role: <c:out value="${user.role}"/></p>
-                            <form id="editRole" action="editRole" method="post" class="hide_form">
-                                <label for="mentor" name=rbutton>Mentor</label>
-                                <input type="radio" name="position" value="mentor"  id="radio1">
-                                <label for="student" name=rbutton>Student</label>
-                                <input type="radio" name="position" value="student" id="radio2">
+                            <form id="editRole" action="editRole" method="post">
+                                <input type="radio" name="position" value="mentor"> Mentor</input>
+                                <input type="radio" name="position" value="student"> Student</input>
                                 <input class="button" type = "submit" value = "Save" />
                             </form>
                         </td>
@@ -79,7 +77,7 @@
                     <tr>
                         <td>
                             <p>E-mail: <c:out value="${user.email}"/></p>
-                            <form id="editMail" action="editMail" method="post" class="hide_form">
+                            <form id="editMail" action="editMail" method="post">
                                 <input class="popupbox" type = "text" name = "mail">
                                 <input class="button" type = "submit" value = "Save" />
                             </form>
@@ -89,7 +87,7 @@
                     <tr>
                         <td>
                             <p>Name: <c:out value="${user.name}"/></p>
-                            <form id="editName" action="myProfil" method="post" class="hide_form">
+                            <form id="editName" action="myProfil" method="post">
                                 <input class="popupbox" type = "text" name = "fullname">
                                 <input class="button" type = "submit" value = "Save"/>
                             </form>
@@ -98,7 +96,7 @@
                     <tr>
                         <td>
                             <p>Password: <c:out value="${user.password}"/></p>
-                            <form id="editPassword" action="editPassword" method="post" class="hide_form">
+                            <form id="editPassword" action="editPassword" method="post">
                                 <input class="popupbox" type = "text" name = "passw">
                                 <input class="button" type = "submit" value = "Save" />
                             </form>
