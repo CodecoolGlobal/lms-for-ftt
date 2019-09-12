@@ -8,22 +8,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/curriculum-mentor.css" type="text/css">
+    <link rel="stylesheet" type="text/css" href="../css/style2.css">
     <title>Hicool</title>
 </head>
 <body>
 <h1>HiCool LMS</h1>
-<div class="dropdown">
-    <button class="dropbtn">Menu</button>
-    <div class="dropdown-content">
-        <a href="curriculum">Curriculum</a>
-        <a href="profile">Profile</a>
-        <a href="#">User list</a>
-        <a href="view-assignment">Assignments</a>
-        <a href="#">Student solutions</a>
-        <a href="#">Statistics</a>
-    </div>
-</div>
+
+<nav>
+    <ul>
+        <a href="profil.jsp"><li class="marked">Profile</li></a>
+        <a href="userList.jsp"><li>UserList</li></a>
+        <a href="curriculum"><li>Curriculum</li></a>
+        <c:choose>
+            <c:when test="${user.role == 'STUDENT'}">
+                <a href="view-assignment"><li>Assignments</li></a>
+                <a href="stats"><li>Statistics</li></a>
+            </c:when>
+            <c:otherwise>
+                <a href="#"><li>Attendance</li></a>
+                <a href="add-text.jsp"><li>Add text</li></a>
+                <a href="add-assignment.jsp"><li>Add assignment</li></a>
+                <a href="solutions"><li>Student Solutions</li></a>
+            </c:otherwise>
+        </c:choose>
+        <a href="logout"><li>Logout</li></a>
+    </ul>
+</nav>
+<jsp:include page="header.jsp" />
+
+
 <h2>Text page list</h2>
 <form action="curriculum" method="get">
     <ul>
@@ -34,12 +47,12 @@
             <br>
         </c:forEach>
     </ul>
-</form:form>
+</form>
 
 <h2>Assignment page list</h2>
     <ul>
         <c:forEach var="assignment" items="${assignments}">
-           <li><h3> ${assignment.getTitle()}<h3></li>
+           <li><h3> ${assignment.getTitle()}</h3></li>
            <li><b>Max score:</b> ${assignment.getMaxScore()}</li>
            <li> ${assignment.getQuestion()}</li>
            <br>

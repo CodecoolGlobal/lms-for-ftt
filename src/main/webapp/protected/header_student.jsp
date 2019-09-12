@@ -20,7 +20,8 @@
     <a href="../userList.jsp"><li>UserList</li></a>
     <a href="curriculum"><li>Curriculum</li></a>
     <a href="assignments"><li>Assignments</li></a>
-    <a href="stats"><li>Stats</li></a>
+    <a href="stats"><li>Statssss</li></a>
+    <a href="logout"><li>Logout</li></a>
 </div>
 </body>
 </html>

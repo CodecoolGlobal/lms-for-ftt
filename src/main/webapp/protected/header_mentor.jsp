@@ -12,7 +12,7 @@
 <head>
     <link rel="stylesheet" type="text/css" href="css-style.css">
     <meta charset="UTF-8">
-    <title>Student header</title>
+    <title>Mentor header</title>
 </head>
 <body>
 <div class="navbar">
@@ -22,6 +22,7 @@
     <a href="assignments"><li>Assignments</li></a>
     <a href="attendance"><li>Attendance</li></a>
     <a href="solutions"><li>Student Solutions</li></a>
+    <a href="logout"><li>Logout</li></a>
 </div>
 </body>
 </html>

@@ -8,27 +8,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/curriculum-mentor.css" type="text/css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/style2.css">
     <title>Hicool</title>
 </head>
 <body>
 <h1>HiCool LMS</h1>
-<div class="navbar">
-     <a href="curriculum">Curriculum</a>
-     <a href="profile">Profile</a>
-     <a href="userlist">User list</a>
-     <div class="subnav">
-       <button class="subnavbtn">Student solutions <i class="fa fa-caret-down"></i></button>
-        <div class="subnav-content">
-              <a href="#">Group by assignment</a>
-              <a href="#">Group by student</a>
-        </div>
-     </div>
-     <a href="add-text.jsp">Add text</a>
-     <a href="add-assignment.jsp">Add assignment</a>
-     <a href="#">Attendance</a>
-</div>
+<nav>
+    <ul>
+        <a href="profil.jsp"><li class="marked">Profile</li></a>
+        <a href="userList.jsp"><li>UserList</li></a>
+        <a href="curriculum"><li>Curriculum</li></a>
+        <c:choose>
+            <c:when test="${user.role == 'STUDENT'}">
+                <a href="view-assignment"><li>Assignments</li></a>
+                <a href="stats"><li>Statistics</li></a>
+            </c:when>
+            <c:otherwise>
+                <a href="#"><li>Attendance</li></a>
+                <a href="add-text.jsp"><li>Add text</li></a>
+                <a href="add-assignment.jsp"><li>Add assignment</li></a>
+                <a href="solutions"><li>Student Solutions</li></a>
+            </c:otherwise>
+        </c:choose>
+        <a href="logout"><li>Logout</li></a>
+    </ul>
+</nav>
+<jsp:include page="header.jsp" />
 
 <h2>Text page list</h2>
 <form action="publishServlet" method="post">
@@ -58,7 +63,7 @@
         </c:forEach>
     </table>
     <td><input type="submit" value="Submit"></td>
-</form:form>
+</form>
 
 <h2>Assignment page list</h2>
 <table>

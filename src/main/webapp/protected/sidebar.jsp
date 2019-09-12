@@ -6,17 +6,8 @@
     <div class="desc">
         <p>Welcome ${user.getName()}! You can see and edit your basic data and track your progress here.</p>
         <p>Name: ${user.getName()}</p>
-        <c:choose>
-            <c:when test="${user.getClass().simpleName == 'student'}">
-                <p>Role: Student</p>
-            </c:when>
-            <c:otherwise>
-                <p>Role: Mentor</p>
-            </c:otherwise>
-        </c:choose>
-        <form action="logout" method="post">
-            <input class="button" type="submit" value="Logout">
-        </form>
+        <p>Role: <c:out value="${user.role}"/></p>
+
     </div>
 
 </div>
