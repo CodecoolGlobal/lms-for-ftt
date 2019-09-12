@@ -30,6 +30,6 @@
                 <br>
                 <br>
                 <br>
-                <p><input class="button" type="submit"></p>
+                <p><input class="button" type="submit" value="Submit"></p>
 </form>
 </body>

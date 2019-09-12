@@ -37,13 +37,6 @@ public final class SessionFilter implements Filter {
         }else{
             resp.sendRedirect(loginURI);
         }
-
-        /*
-        if(user == null){
-            resp.sendRedirect("../login.jsp");
-        } else {
-            filterChain.doFilter(req, resp);
-        }*/
     }
 
     @Override

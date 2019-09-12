@@ -82,7 +82,7 @@ public final class DBUserDao extends AbstractDao {
                 String id = String.valueOf(resultSet.getInt("user_id"));
                 String name = resultSet.getString("user_name");
                 String mail = resultSet.getString("email");
-                Role role = Role.valueOf(resultSet.getString("user_role"));
+                Role role = Role.valueOf(resultSet.getString("user_role").toUpperCase());
                 String pw = resultSet.getString("password");
                 userList.add(new User(Integer.valueOf(id), name, mail, role, pw));
             }

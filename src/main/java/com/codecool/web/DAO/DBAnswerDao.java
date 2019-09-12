@@ -1,6 +1,8 @@
 package com.codecool.web.DAO;
 
 import com.codecool.web.model.curriculum.Answer;
+import com.codecool.web.model.curriculum.Assignment;
+import com.codecool.web.model.curriculum.Solution;
 import com.codecool.web.model.user.User;
 import com.codecool.web.service.AssignmentService;
 
@@ -134,6 +136,35 @@ public class DBAnswerDao extends AbstractDao {
             
             return listByAsId;
         }
+    }
+    
+    public List<Solution> listAllSolutions(Connection connection) throws SQLException {
+        List<Solution> solutions = new ArrayList<>();
+    
+        boolean autoCommit = connection.getAutoCommit();
+        connection.setAutoCommit(false);
+    
+        String sql = "SELECT answers.assignment_id AS id, answers.user_id AS us_id, users.user_name AS us_name, assignments.question AS question, answers.answer AS solution," +
+            "assignments.max_score AS max_score, answers.score AS score FROM answers " +
+            "JOIN assignments ON assignments.assignment_id=answers.assignment_id " +
+            "JOIN users ON users.user_id=answers.user_id";
+        
+        try (Statement stmt = connection.createStatement()) {
+            ResultSet rs = stmt.executeQuery(sql);
+            
+            while (rs.next()) {
+                Solution tempSol = new Solution(rs.getInt("id"), rs.getInt("us_id"), rs.getString("us_name"), rs.getString("question"), rs.getString("solution"), rs.getInt("max_score"));
+                if (rs.getString("score") != null) {
+                    tempSol.setScore(rs.getInt("score"));
+                }
+                solutions.add(tempSol);
+            }
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
+        return solutions;
     }
     
     private LocalDateTime localDateFromTimestamp(Timestamp timestamp) {

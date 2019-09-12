@@ -13,7 +13,7 @@
     <title>Hicool</title>
 </head>
 <body>
-<h1>HiCool LMS</h1>
+<h1>Hi...C.ool LMS</h1>
 <div class="navbar">
      <a href="curriculum">Curriculum</a>
      <a href="profile">Profile</a>
@@ -28,6 +28,8 @@
      <a href="add-text.jsp">Add text</a>
      <a href="add-assignment.jsp">Add assignment</a>
      <a href="#">Attendance</a>
+     <a href="solution-list">Solutions</a>
+     <a href="logout">Log out</a>
 </div>
 
 <h2>Text page list</h2>
@@ -36,7 +38,7 @@
         <tr>
             <th>Title</th>
             <th>Published</th>
-            <th> Set to change</th>
+            <th> Change published status</th>
         </tr>
 
         <c:forEach var="text" items="${texts}">
@@ -58,7 +60,7 @@
         </c:forEach>
     </table>
     <td><input type="submit" value="Submit"></td>
-</form:form>
+</form>
 
 <h2>Assignment page list</h2>
 <table>

@@ -2,6 +2,7 @@ package com.codecool.web.service;
 
 import com.codecool.web.DAO.DBAnswerDao;
 import com.codecool.web.model.curriculum.Answer;
+import com.codecool.web.model.curriculum.Solution;
 import com.codecool.web.model.user.User;
 
 import java.sql.Connection;
@@ -9,6 +10,7 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
+import java.util.ArrayList;
 import java.util.List;
 
 public class AnswerService {
@@ -50,5 +52,22 @@ public class AnswerService {
     
     private LocalDateTime localDateFromTimestamp(Timestamp timestamp) {
         return LocalDateTime.ofInstant(timestamp.toInstant(), ZoneOffset.ofHours(0));
+    }
+    
+    public List<Solution> allSolutions(Connection conn) throws SQLException {
+        return  answerDao.listAllSolutions(conn);
+    }
+    
+    public List<Solution> studentSolutions(Connection conn, User user) throws SQLException {
+        List<Solution> studentSol = new ArrayList<>();
+    
+        for (Solution s: answerDao.listAllSolutions(conn)
+             ) {
+            if (s.getUserId() == user.getUserId()) {
+                studentSol.add(s);
+            }
+        }
+        
+        return studentSol;
     }
 }

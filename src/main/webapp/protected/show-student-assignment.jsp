@@ -39,7 +39,7 @@
                 <td>
                     <form class="" action="post-assignment" method="post">
                         <input type="hidden" name="id" value="${as.id}">
-                        <input type="submit">
+                        <input type="submit" value="Accomplish">
                     </form>
                 </td>
             </tr>

@@ -20,32 +20,41 @@
         <a href="profile">Profile</a>
         <a href="#">User list</a>
         <a href="view-assignment">Assignments</a>
-        <a href="#">Student solutions</a>
+        <a href="solution-list">Student solutions</a>
         <a href="#">Statistics</a>
     </div>
 </div>
 <h2>Text page list</h2>
 <form action="curriculum" method="get">
-    <ul>
+    <table>
+            <tr>
+                <th>Title</th>
+                <th>Content</th>
+            </tr>
         <c:forEach var="text" items="${texts}">
-            <li><h3> ${text.getTitle()} </h3></li>
-            <li> ${text.getText()}</li>
-            <br>
-            <br>
+            <tr>
+                <td> ${text.getTitle()}</td>
+                <td> ${text.getText()}</td>
+            </tr>
         </c:forEach>
-    </ul>
+    </table>
 </form:form>
 
 <h2>Assignment page list</h2>
-    <ul>
+    <table>
+            <tr>
+                <th>Title</th>
+                <th>Question</th>
+                <th>Max score</th>
+            </tr>
         <c:forEach var="assignment" items="${assignments}">
-           <li><h3> ${assignment.getTitle()}<h3></li>
-           <li><b>Max score:</b> ${assignment.getMaxScore()}</li>
-           <li> ${assignment.getQuestion()}</li>
-           <br>
-           <br>
+            <tr>
+               <td> ${assignment.getTitle()}</td>
+               <td> ${assignment.getQuestion()}</td>
+               <td> ${assignment.getMaxScore()}</td>
+            </tr>
         </c:forEach>
-    </ul>
+    </table>
 
 </body>
 </html>
