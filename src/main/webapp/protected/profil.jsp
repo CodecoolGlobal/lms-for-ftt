@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="style2.css">
+    <link rel="stylesheet" type="text/css" href="../css/style2.css">
     <title>User profil</title>
 
 </head>
@@ -31,23 +31,25 @@
 </script>
 <nav>
     <ul>
-        <a href="profile.jsp"><li class="marked">Profile</li></a>
+        <a href="profil.jsp"><li class="marked">Profile</li></a>
         <a href="userlist"><li>UserList</li></a>
         <a href="curriculum"><li>Curriculum</li></a>
         <c:choose>
             <c:when test="${user.role == 'STUDENT'}">
-                <a href="assignments"><li>Assignments</li></a>
-                <a href="stats"><li>Stats</li></a>
+                <a href="view-assignment"><li>Assignments</li></a>
+                <a href="stats"><li>Statistics</li></a>
             </c:when>
             <c:otherwise>
-                <a href="attendance"><li>Attendance</li></a>
+                <a href="#"><li>Attendance</li></a>
+                <a href="add-text.jsp"><li>Add text</li></a>
+                <a href="add-assignment.jsp"><li>Add assignment</li></a>
                 <a href="solutions"><li>Student Solutions</li></a>
             </c:otherwise>
         </c:choose>
+        <a href="logout"><li>Logout</li></a>
     </ul>
 </nav>
 <jsp:include page="header.jsp" />
-
 <div class="wrapper">
     <div class="content">
 
@@ -65,45 +67,39 @@
                     <tr>
                         <td>
                             <p>Role: <c:out value="${user.role}"/></p>
-                            <form id="editRole" action="editRole" method="post" class="hide_form">
-                                <label for="mentor" name=rbutton>Mentor</label>
-                                <input type="radio" name="position" value="mentor" id="radio1">
-                                <label for="student" name=rbutton>Student</label>
-                                <input type="radio" name="position" value="student" id="radio2">
-                                <input class="popupbutton" type = "submit" value = "Save" />
+                            <form id="editRole" action="editRole" method="post">
+                                <input type="radio" name="position" value="mentor"> Mentor</input>
+                                <input type="radio" name="position" value="student"> Student</input>
+                                <input class="button" type = "submit" value = "Save" />
                             </form>
-                        <td><i class="fa fa-spinner fa-spin fa-3x fa-fw" onclick="editRole()" style="font-size:24px; cursor:pointer"></i></td>
                         </td>
                     </tr>
                     <tr>
                         <td>
                             <p>E-mail: <c:out value="${user.email}"/></p>
-                            <form id="editMail" action="editMail" method="post" class="hide_form">
+                            <form id="editMail" action="editMail" method="post">
                                 <input class="popupbox" type = "text" name = "mail">
-                                <input class="popupbutton" type = "submit" value = "Save" />
+                                <input class="button" type = "submit" value = "Save" />
                             </form>
-                        <td><i class="fa fa-spinner fa-spin fa-3x fa-fw" onclick="editMail()" style="font-size:24px; cursor:pointer"></i></td>
                         </td>
                         </td>
                     </tr>
                     <tr>
                         <td>
                             <p>Name: <c:out value="${user.name}"/></p>
-                            <form id="editName" action="myProfil" method="post" class="hide_form">
+                            <form id="editName" action="myProfil" method="post">
                                 <input class="popupbox" type = "text" name = "fullname">
-                                <input class="popupbutton" type = "submit" value = "Save"/>
+                                <input class="button" type = "submit" value = "Save"/>
                             </form>
-                        <td><i class="fa fa-spinner fa-spin fa-3x fa-fw" onclick="editName()" style="font-size:24px; cursor:pointer"></i></td>
                         </td>
                     </tr>
                     <tr>
                         <td>
                             <p>Password: <c:out value="${user.password}"/></p>
-                            <form id="editPassword" action="editPassword" method="post" class="hide_form">
+                            <form id="editPassword" action="editPassword" method="post">
                                 <input class="popupbox" type = "text" name = "passw">
-                                <input class="popupbutton" type = "submit" value = "Save" />
+                                <input class="button" type = "submit" value = "Save" />
                             </form>
-                        <td><i class="fa fa-spinner fa-spin fa-3x fa-fw" onclick="editPassword()" style="font-size:24px; cursor:pointer"></i></td>
                         </td>
                     </tr>
                 </table>
@@ -124,13 +120,7 @@
                     <input type="submit" value="Update"></a>
                 </form>
                 --%>
-            <div>
-                <td>
-                    <form method="post" action="curriculum">
-                        <input type="submit" value="To curriculum">
-                    </form>
-                </td>
-            </div>
+
         </div>
     </div>
     <div class="sidebar">

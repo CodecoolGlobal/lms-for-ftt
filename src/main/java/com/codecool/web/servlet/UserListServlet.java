@@ -19,8 +19,8 @@ public class UserListServlet extends AbstractServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        
-        try (Connection connection = getConnection(request.getServletContext())) {
+
+         try (Connection connection = getConnection(request.getServletContext())) {
             DBUserDao userDao = new DBUserDao(connection);
             UserService userService = new UserService(userDao);
             request.setAttribute("userList", userService.getUsers());

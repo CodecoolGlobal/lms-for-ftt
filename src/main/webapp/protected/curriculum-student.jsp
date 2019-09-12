@@ -13,48 +13,52 @@
 </head>
 <body>
 <h1>HiCool LMS</h1>
-<div class="dropdown">
-    <button class="dropbtn">Menu</button>
-    <div class="dropdown-content">
-        <a href="curriculum">Curriculum</a>
-        <a href="profile">Profile</a>
-        <a href="#">User list</a>
-        <a href="view-assignment">Assignments</a>
-        <a href="solution-list">Student solutions</a>
-        <a href="#">Statistics</a>
-    </div>
-</div>
+
+<nav>
+    <ul>
+        <a href="profil.jsp"><li class="marked">Profile</li></a>
+        <a href="userList.jsp"><li>UserList</li></a>
+        <a href="curriculum"><li>Curriculum</li></a>
+        <c:choose>
+            <c:when test="${user.role == 'STUDENT'}">
+                <a href="view-assignment"><li>Assignments</li></a>
+                <a href="stats"><li>Statistics</li></a>
+            </c:when>
+            <c:otherwise>
+                <a href="#"><li>Attendance</li></a>
+                <a href="add-text.jsp"><li>Add text</li></a>
+                <a href="add-assignment.jsp"><li>Add assignment</li></a>
+                <a href="solutions"><li>Student Solutions</li></a>
+            </c:otherwise>
+        </c:choose>
+        <a href="logout"><li>Logout</li></a>
+    </ul>
+</nav>
+<jsp:include page="header.jsp" />
+
+
 <h2>Text page list</h2>
 <form action="curriculum" method="get">
-    <table>
-            <tr>
-                <th>Title</th>
-                <th>Content</th>
-            </tr>
+    <ul>
         <c:forEach var="text" items="${texts}">
-            <tr>
-                <td> ${text.getTitle()}</td>
-                <td> ${text.getText()}</td>
-            </tr>
+            <li><h3> ${text.getTitle()} </h3></li>
+            <li> ${text.getText()}</li>
+            <br>
+            <br>
         </c:forEach>
-    </table>
+    </ul>
 </form:form>
 
 <h2>Assignment page list</h2>
-    <table>
-            <tr>
-                <th>Title</th>
-                <th>Question</th>
-                <th>Max score</th>
-            </tr>
+    <ul>
         <c:forEach var="assignment" items="${assignments}">
-            <tr>
-               <td> ${assignment.getTitle()}</td>
-               <td> ${assignment.getQuestion()}</td>
-               <td> ${assignment.getMaxScore()}</td>
-            </tr>
+           <li><h3> ${assignment.getTitle()}<h3></li>
+           <li><b>Max score:</b> ${assignment.getMaxScore()}</li>
+           <li> ${assignment.getQuestion()}</li>
+           <br>
+           <br>
         </c:forEach>
-    </table>
+    </ul>
 
 </body>
 </html>

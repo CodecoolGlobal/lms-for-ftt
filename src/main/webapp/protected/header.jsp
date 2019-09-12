@@ -9,7 +9,7 @@
     <div class="svg-wrapper">
         <svg height="60" width="320" xmlns="http://www.w3.org/2000/svg">
             <rect class="shape" height="60" width="320" />
-            <div class="headertext"><a class="headerlink" href="news">LMS</a></div>
+            <div class="headertext">Hi...C.ool</div>
         </svg>
     </div>
 </div>
