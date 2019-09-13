@@ -51,7 +51,7 @@ CREATE TABLE answers(
                         answer text,
                         score smallint,
                         submission_date TIMESTAMP WITH TIME ZONE NOT NULL,
-                        PRIMARY KEY (assignment_id)
+                        PRIMARY KEY (assignment_id, user_id)
 );
 
 CREATE TABLE texts(
