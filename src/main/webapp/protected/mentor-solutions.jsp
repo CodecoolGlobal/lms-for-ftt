@@ -23,6 +23,7 @@
 <table>
     <tr>
         <th>Question</th>
+        <th>Student</th>
         <th>Solution</th>
         <th>Max score</th>
         <th>Given score</th>
@@ -31,6 +32,7 @@
     <c:forEach var="solution" items="${solutions}">
         <tr>
            <td> ${solution.getQuestion()}</td>
+           <td> ${solution.getUserName()}</td>
            <td> ${solution.getMySolution()}</td>
            <td> ${solution.getMaxScore()}</td>
            <form action="scoring" method="post">

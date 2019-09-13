@@ -59,6 +59,7 @@ blockquote p {
 table {
     border-collapse: separate;
     border-spacing: 0;
+    padding-left: 10%;
 }
 @media (min-width:1020px) {
     .    { width:990px; }
@@ -464,4 +465,8 @@ tr {
 h2 {
     text-align: center;
     font-size: 30px;
+}
+
+div {
+    padding-left: 10%;
 }
