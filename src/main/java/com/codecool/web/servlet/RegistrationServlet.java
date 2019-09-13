@@ -37,7 +37,7 @@ public class RegistrationServlet extends AbstractServlet {
             String role = request.getParameter("role");
             String password = request.getParameter("password");
             
-            if (us.notValidated(name, mail, role, password).equals("newUser")) {
+            if (us.notValidated(connection, name, mail, role, password).equals("newUser")) {
                 User user = null;
                 us.addUser(name, mail, role, password);
                 user = us.getUser(mail);
@@ -45,7 +45,7 @@ public class RegistrationServlet extends AbstractServlet {
     
                 RequestDispatcher rd = request.getRequestDispatcher("home.jsp");
                 rd.forward(request, response);
-            } else if(us.notValidated(name, mail, role, password).equals("empty")) {
+            } else if(us.notValidated(connection, name, mail, role, password).equals("empty")) {
                 RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
                 out.println("<font color=red>Please fill in each field</font>");
                 rd.include(request, response);

@@ -23,7 +23,7 @@ public class UserListServlet extends AbstractServlet {
          try (Connection connection = getConnection(request.getServletContext())) {
             DBUserDao userDao = new DBUserDao(connection);
             UserService userService = new UserService(userDao);
-            request.setAttribute("userList", userService.getUsers());
+            request.setAttribute("userList", userService.getUsers(connection));
 
         } catch (SQLException e) {
             e.getMessage();

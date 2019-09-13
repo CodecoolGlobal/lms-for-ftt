@@ -3,11 +3,8 @@ package com.codecool.web.service;
 import com.codecool.web.DAO.DBUserDao;
 import com.codecool.web.model.user.User;
 
-import com.codecool.web.model.enums.Role;
-
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class UserService {
@@ -20,8 +17,8 @@ public class UserService {
 
     }
 
-    public List<User> getUsers() throws SQLException {
-        return userDao.getUsersList();
+    public List<User> getUsers(Connection connection) throws SQLException {
+        return userDao.getUsersList(connection);
     }
 
     public User getUser(String mail) throws SQLException{
@@ -34,10 +31,10 @@ public class UserService {
 
     }
 
-    public String notValidated(String name, String email, String role, String passWord) throws SQLException {
+    public String notValidated(Connection connection, String name, String email, String role, String passWord) throws SQLException {
         String validated = "newUser";
 
-        for (User user : getUsers()) {
+        for (User user : getUsers(connection)) {
             if ( user.getEmail().equals(email)) {
                 validated = "registered";
             } else if (name == null || email == null || role == null|| passWord == null ) {

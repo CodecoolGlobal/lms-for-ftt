@@ -73,10 +73,10 @@ public final class DBUserDao extends AbstractDao {
         return user;
     }
 
-    public List<User> getUsersList() throws SQLException{
+    public List<User> getUsersList(Connection connection) throws SQLException{
         List<User> userList = new ArrayList<>();
         String sql = "SELECT user_id, user_name, email, user_role, password from users";
-        try(Statement statement = connection.createStatement()){
+        try(Statement statement = this.connection.createStatement()){
             ResultSet resultSet = statement.executeQuery(sql);
             while (resultSet.next()){
                 String id = String.valueOf(resultSet.getInt("user_id"));
