@@ -27,16 +27,9 @@
         </tr>
         <c:forEach items="${userList}" var="user">
             <tr>
-                <td>
-                        ${user.userId}
-                </td>
-                <td>
-                        ${user.name}
-                </td>
-                <td>
-                        ${user.email}
-                </td>
-
+                <td>${user.userId}</td>
+                <td>${user.name}</td>
+                <td>${user.email}</td>
             </tr>
         </c:forEach>
     </table>
