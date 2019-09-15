@@ -58,6 +58,18 @@ public class AnswerService {
         return  answerDao.listAllSolutions(conn);
     }
     
+    public Solution singleSolution(Connection conn, int assignmentId, int userId) throws SQLException {
+        Solution tempSol = null;
+        for (Solution sol:
+             answerDao.listAllSolutions(conn)) {
+            if (sol.getAssignmentId() == assignmentId && sol.getUserId() == userId) {
+                tempSol = sol;
+            }
+        }
+        
+        return tempSol;
+    }
+    
     public List<Solution> studentSolutions(Connection conn, User user) throws SQLException {
         List<Solution> studentSol = new ArrayList<>();
     
@@ -69,5 +81,9 @@ public class AnswerService {
         }
         
         return studentSol;
+    }
+    
+    public void setScore(Connection conn, int assignmentId, int userId, int score) throws SQLException {
+        answerDao.addScore(conn, assignmentId, userId, score);
     }
 }

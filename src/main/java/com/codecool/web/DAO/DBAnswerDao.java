@@ -1,7 +1,6 @@
 package com.codecool.web.DAO;
 
 import com.codecool.web.model.curriculum.Answer;
-import com.codecool.web.model.curriculum.Assignment;
 import com.codecool.web.model.curriculum.Solution;
 import com.codecool.web.model.user.User;
 import com.codecool.web.service.AssignmentService;
@@ -144,7 +143,7 @@ public class DBAnswerDao extends AbstractDao {
         boolean autoCommit = connection.getAutoCommit();
         connection.setAutoCommit(false);
     
-        String sql = "SELECT answers.assignment_id AS id, answers.user_id AS us_id, users.user_name AS us_name, assignments.question AS question, answers.answer AS solution," +
+        String sql = "SELECT answers.assignment_id AS id, answers.user_id AS us_id, users.user_name AS us_name, assignments.title AS title, answers.answer AS solution," +
             "assignments.max_score AS max_score, answers.score AS score FROM answers " +
             "JOIN assignments ON assignments.assignment_id=answers.assignment_id " +
             "JOIN users ON users.user_id=answers.user_id";
@@ -153,7 +152,7 @@ public class DBAnswerDao extends AbstractDao {
             ResultSet rs = stmt.executeQuery(sql);
             
             while (rs.next()) {
-                Solution tempSol = new Solution(rs.getInt("id"), rs.getInt("us_id"), rs.getString("us_name"), rs.getString("question"), rs.getString("solution"), rs.getInt("max_score"));
+                Solution tempSol = new Solution(rs.getInt("id"), rs.getInt("us_id"), rs.getString("us_name"), rs.getString("title"), rs.getString("solution"), rs.getInt("max_score"));
                 if (rs.getString("score") != null) {
                     tempSol.setScore(rs.getInt("score"));
                 }
@@ -165,6 +164,18 @@ public class DBAnswerDao extends AbstractDao {
         }
         
         return solutions;
+    }
+    
+    public void addScore(Connection conn, int assignmentId, int userId, int myScore) throws SQLException {
+        
+        String sql = "UPDATE answers SET score=? WHERE assignment_id=? AND user_id= ?";
+        try (PreparedStatement prStm = conn.prepareStatement(sql)) {
+            prStm.setInt(1, myScore);
+            prStm.setInt(2, assignmentId);
+            prStm.setInt(3, userId);
+    
+            prStm.executeUpdate();
+        }
     }
     
     private LocalDateTime localDateFromTimestamp(Timestamp timestamp) {

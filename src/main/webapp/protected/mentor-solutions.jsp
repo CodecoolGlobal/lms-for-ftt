@@ -22,22 +22,31 @@
 
 <table>
     <tr>
-        <th>Question</th>
+        <th>Assignment title</th>
         <th>Student</th>
-        <th>Solution</th>
         <th>Max score</th>
         <th>Given score</th>
     </tr>
 
     <c:forEach var="solution" items="${solutions}">
         <tr>
-           <td> ${solution.getQuestion()}</td>
+           <td> ${solution.getTitle()}</td>
            <td> ${solution.getUserName()}</td>
-           <td> ${solution.getMySolution()}</td>
            <td> ${solution.getMaxScore()}</td>
-           <form action="scoring" method="post">
-               <td><input type="number" min="0" max=${solution.getMaxScore()} name="max_score" placeholder=${solution.getMaxScore()}></td>
-           </form>
+           <td>
+                <c:choose>
+                     <c:when test="${not empty solution.getScore()}">
+                          ${solution.getScore()}
+                     </c:when>
+                </c:choose>
+           </td>
+           <td>
+               <form action="scoring" method="post">
+                   <input type="hidden" name="assignmentID" value="${solution.assignmentId}">
+                   <input type="hidden" name="userID" value="${solution.userId}">
+                   <td><input type="Submit" value="Add score"></td>
+                </form>
+           </td>
         </tr>
     </c:forEach>
 </table>

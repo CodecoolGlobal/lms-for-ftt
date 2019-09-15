@@ -17,16 +17,22 @@
 <br>
 <jsp:include page="header.jsp" />
 
-<h2>Solution View</h2>
-<h3>Id: ${assignment.id}</h3>
-<p>${assignment.question}</p>
-    <form action="solution" method="post">
-        Please enter your solution:
+<h2>Add score to solution</h2>
+<h3>Assignment ID: ${solution.assignmentId}</h3>
+<p>Assignment title: ${solution.title}</p>
+<br>
+<p> Student name: ${solution.userName}</p>
+<br>
+<p>Solution: ${solution.mySolution}</p>
+<br>
+    <form action="save-score" method="post">
+        Please enter your score:
         <br>
-        <input type="hidden" name="id" value="${assignment.id}">
-            <textarea type="text" name="solution" rows="5" cols="30"></textarea>
-            <br>
-            <input type="Submit" value="SUBMIT">
+        <input type="hidden" name="assignmentId" value="${solution.getAssignmentId()}">
+        <input type="hidden" name="userId" value="${solution.userId}">
+        <p><input type="number" name="score" min=0 max=${solution.getMaxScore()} placeholder="${solution.getMaxScore()}"></p>
+        <br>
+        <input type="Submit" value="SUBMIT">
     </form>
 </body>
 

@@ -69,7 +69,7 @@ public class SolutionListServlet extends AbstractServlet {
         }
     }
     
-    /*public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+    public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         resp.setContentType("text/html");
         PrintWriter pw = resp.getWriter();
         HttpSession session = req.getSession(false);
@@ -106,5 +106,5 @@ public class SolutionListServlet extends AbstractServlet {
             }
             req.getRequestDispatcher("student-solutions.jsp").forward(req, resp);
         }
-    }*/
+    }
 }
