@@ -166,6 +166,37 @@ public class DBAnswerDao extends AbstractDao {
         return solutions;
     }
     
+    public List<Solution> listStudentSolution(Connection conn) throws SQLException {
+        List<Solution> solutions = new ArrayList<>();
+    
+        boolean autoCommit = connection.getAutoCommit();
+        connection.setAutoCommit(false);
+    
+        String sql = "SELECT answers.assignment_id AS id, answers.user_id AS us_id, users.user_name AS us_name, assignments.title AS title, answers.answer AS solution," +
+            "assignments.max_score AS max_score, answers.score AS score FROM answers " +
+            "JOIN assignments ON assignments.assignment_id=answers.assignment_id " +
+            "JOIN users ON users.user_id=answers.user_id";
+    
+        try (Statement stmt = connection.createStatement()) {
+            ResultSet rs = stmt.executeQuery(sql);
+        
+            while (rs.next()) {
+                Solution tempSol = new Solution(rs.getInt("id"), rs.getInt("us_id"), rs.getString("us_name"), rs.getString("title"), rs.getString("solution"), rs.getInt("max_score"));
+                if (rs.getString("score") == null) {
+                    tempSol.setScore(2000);
+                } else if (rs.getString("score") != null) {
+                    tempSol.setScore(rs.getInt("score"));
+                }
+                solutions.add(tempSol);
+            }
+        
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    
+        return solutions;
+    }
+    
     public void addScore(Connection conn, int assignmentId, int userId, int myScore) throws SQLException {
         
         String sql = "UPDATE answers SET score=? WHERE assignment_id=? AND user_id= ?";

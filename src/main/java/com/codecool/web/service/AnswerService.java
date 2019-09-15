@@ -73,7 +73,7 @@ public class AnswerService {
     public List<Solution> studentSolutions(Connection conn, User user) throws SQLException {
         List<Solution> studentSol = new ArrayList<>();
     
-        for (Solution s: answerDao.listAllSolutions(conn)
+        for (Solution s: answerDao.listStudentSolution(conn)
              ) {
             if (s.getUserId() == user.getUserId()) {
                 studentSol.add(s);

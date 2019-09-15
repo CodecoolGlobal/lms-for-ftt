@@ -22,7 +22,7 @@
 
 <table>
     <tr>
-        <th>Question</th>
+        <th>Assignment title</th>
         <th>Solution</th>
         <th>Max score</th>
         <th>Achieved score</th>
@@ -30,17 +30,17 @@
 
     <c:forEach var="solution" items="${solutions}">
         <tr>
-           <td> ${solution.getQuestion()}</td>
+           <td> ${solution.getTitle()}</td>
            <td> ${solution.getMySolution()}</td>
            <td> ${solution.getMaxScore()}</td>
-           <c:choose>
-              <c:when test="${solution.getScore() == 0}">
-                  <td>No score found.</td>
-              </c:when>
-              <c:otherwise>
-               <td>${solution.getScore()}</td>
+           <td><c:choose>
+               <c:when test="${solution.score > solution.getMaxScore()}">
+                    No score found.
+               </c:when>
+               <c:otherwise>
+                    ${solution.getScore()}
                </c:otherwise>
-           </c:choose>
+           </c:choose></td>
         </tr>
     </c:forEach>
 </table>
