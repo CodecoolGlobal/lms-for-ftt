@@ -23,7 +23,7 @@
         <c:choose>
             <c:when test="${user.role == 'STUDENT'}">
                 <a href="view-assignment"><li>Assignments</li></a>
-                <a href="stats"><li>Statistics</li></a>
+                <a href="view-stats"><li>Statistics</li></a>
                 <a href="solution-list"><li>Your Solutions</li></a>
             </c:when>
             <c:otherwise>
