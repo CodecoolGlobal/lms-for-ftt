@@ -31,7 +31,7 @@
     <c:forEach var="solution" items="${solutions}">
         <tr>
            <td> ${solution.getTitle()}</td>
-           <td> ${solution.getSubmissionDate()}</td>
+           <td> ${solution.getSubmissionDate().toLocalDate()}</td>
            <td> ${solution.getMaxScore()}</td>
            <td><c:choose>
               <c:when test="${solution.score > solution.getMaxScore()}">
